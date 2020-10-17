@@ -35,4 +35,17 @@ Pracujemy na gałęziach w metodologii `branch per feature`. Staramy się tworzy
 
 ### Development
 
-TBD - opis jak postawić aplikację (niezależny od systemu).
+Ponieważ jest napisany skrypt stawiający backend aplikacji, można to zrobić w jednym kroku. Uprzednio trzeba zainstalować Dockera i docker-compose. Następnie, komenda uruchomi kontener z aplikacją - dla systemu z Linux:
+```bash
+./main.sh
+```
+bądź dla systemu Windows:
+```bash
+.\main-win.bat
+```
+
+**UWAGA!**  
+W przypadku błędu `standard_init_linux.go:211: exec user process caused „no such file or directory“` trzeba zmienić kodowanie końca linii! Info jak to zrobić u Kamila 😊
+
+Po zbudowaniu kontenera dostępne powinno być API. Można to sprawdzić wchodząć w przeglądarce pod adres `localhost:5000/api/1`.
+
