@@ -3,9 +3,15 @@
 # clear interface
 docker-compose -f docker/docker-compose-dev.yml down --volumes
 
-# build and up backend
+# backend
 docker-compose -f docker/docker-compose-dev.yml build "backend"
 docker-compose -f docker/docker-compose-dev.yml up -d "backend"
 
-# follow backend
-docker-compose -f docker/docker-compose-dev.yml logs --follow --tail 50 "backend"
+# mongo
+docker-compose -f docker/docker-compose-dev.yml build "mongo"
+docker-compose -f docker/docker-compose-dev.yml up -d "mongo"
+docker-compose -f docker/docker-compose-dev.yml run --rm "backend" "flask init_db"
+
+# follow
+docker-compose -f docker/docker-compose-dev.yml logs --follow --tail 50 "backend" &
+docker-compose -f docker/docker-compose-dev.yml logs --follow --tail 50 "mongo" &

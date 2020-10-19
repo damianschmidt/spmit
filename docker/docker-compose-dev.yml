@@ -9,3 +9,9 @@ services:
             - "5000:5000"
         volumes:
             - "../backend:/backend"
+    mongo:
+        container_name: "spmit_db"
+        image: mongo
+        restart: always
+        ports:
+            - "27017:27017"

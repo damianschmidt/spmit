@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from backend.config import Config
+from backend.wrappers import MONGO
 
 
 def create_app(config_class=Config):
@@ -10,6 +11,7 @@ def create_app(config_class=Config):
     if app.debug:
         CORS(app)
 
+    MONGO.init_app(app)
 
     from backend.api.basic import BASIC
 

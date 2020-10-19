@@ -48,4 +48,3 @@ bądź dla systemu Windows:
 W przypadku błędu `standard_init_linux.go:211: exec user process caused „no such file or directory“` trzeba zmienić kodowanie końca linii! Info jak to zrobić u Kamila 😊
 
 Po zbudowaniu kontenera dostępne powinno być API. Można to sprawdzić wchodząć w przeglądarce pod adres `localhost:5000/api/1`.
-
