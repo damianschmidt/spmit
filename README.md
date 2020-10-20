@@ -53,3 +53,9 @@ Przykładowe zapytanie za pomocą cURL, które można wysłać na backend:
 ```bash
 curl -X GET -H "Content-type: application/json" -H "Accept: application/json" -d '{"packages_list": [{"name": "TEST", "value": 1},{"name": "TEST2", "value": 2}], "courier_latitude": 2.0, "courier_longitude": 3.0}' "http://localhost:5000/api/1/lockers/route"
 ```
+
+Dodano do skryptu również frontend. Ponieważ kontener buduje sobie aplikacje na podstawie folderu node_modules trzeba uprzednio wejść lokalnie w `/spmit/frontend`, a następnie wpisać komendę:
+```bash
+npm install
+```
+Komende należy puścić lokalnie, kiedy ktoś dodał jakąś paczkę do node_modules, nie trzeba tego robić za każdym razem! Po zbudowaniu kontenerów, frontend jest dostępny pod `localhost:3000`.
