@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+    backend:
+        container_name: "spmit_backend"
+        build:
+            context: ../backend
+            dockerfile: Dockerfile
+        ports:
+            - "5000:5000"
+        volumes:
+            - "../backend:/backend"
+    frontend:
+        stdin_open: true
+        container_name: "spmit_frontend"
+        build:
+            context: ../frontend
+            dockerfile: Dockerfile
+        ports:
+            - "3000:3000"
+        volumes:
+            - "../frontend:/frontend"
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+    mongo:
+        container_name: "spmit_db"
+        image: mongo
+        restart: always
+        ports:
+            - "27017:27017"
