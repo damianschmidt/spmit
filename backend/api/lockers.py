@@ -23,8 +23,8 @@ def get_route():
     """
     GET args:
         packages_list: (list) name of lockers with number of packs
-        courier_latitude: (number)
-        courier_longitude: (number)
+        courier_latitude: (float)
+        courier_longitude: (float)
     """
 
     try:
