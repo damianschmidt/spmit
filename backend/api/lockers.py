@@ -3,6 +3,7 @@ from marshmallow import ValidationError
 
 from backend.db_interfaces.lockers import LockersDbTools
 from backend.optimal_route.optimal_route import get_optimal_route
+from backend.optimal_route.here_api import here_api_test
 from backend.api.schemas.lockers import LockerOptimalRouteSchema
 
 
@@ -39,3 +40,9 @@ def get_route():
         packages_list, courier_latitude, courier_longitude)
 
     return jsonify(optimal_route), 200
+
+
+@LOCKERS.route('/here_api', methods=['GET'])
+def get_here_api_test():
+    here_api_data = here_api_test()
+    return jsonify(here_api_data), 200
