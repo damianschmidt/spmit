@@ -31,7 +31,7 @@ def get_route():
     except ValidationError as error:
         return jsonify({'error': str(error)}), 400
 
-    lockers_list = data_dict['lockers_list']
+    lockers_list = data_dict['lockers_list'] + ['courier']
     courier_latitude = data_dict['courier_latitude']
     courier_longitude = data_dict['courier_latitude']
 
