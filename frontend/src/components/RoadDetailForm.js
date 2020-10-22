@@ -1,57 +1,62 @@
 import React from "react";
-import { Form, Segment } from "semantic-ui-react";
-
-const options = [
-  { key: "m", text: "Male", value: "male" },
-  { key: "f", text: "Female", value: "female" },
-  { key: "o", text: "Other", value: "other" },
-];
+import axios from "axios";
+import { Accordion, Form, Icon, Segment } from "semantic-ui-react";
+import Localization from "./Localization";
 
 class FormExampleSubcomponentControl extends React.Component {
-  state = {};
+  state = { lockers: [], options: [], activeIndex: 0 };
 
-  handleChange = (e, { value }) => this.setState({ value });
+  componentDidMount = async () => {
+    const response = await axios.get("http://localhost:5000/api/1/lockers", {});
+
+    this.setState({ lockers: response.data });
+    this.state.lockers = this.state.lockers
+      .map((elem) => {
+        return { key: elem.name, text: elem.name, value: elem.name };
+      })
+      .forEach((e) => this.state.options.push(e));
+  };
+
+  handleClick = (e, titleProps) => {
+    const { index } = titleProps;
+    const { activeIndex } = this.state;
+    const newIndex = activeIndex === index ? -1 : index;
+
+    this.setState({ activeIndex: newIndex });
+  };
 
   render() {
-    const { value } = this.state;
-    return (
-      <Segment inverted>
-        <Form inverted>
-          <Form.Group widths="equal">
-            <Form.Input fluid label="First name" placeholder="First name" />
-            <Form.Input fluid label="Last name" placeholder="Last name" />
-            <Form.Select
-              fluid
-              label="Gender"
-              options={options}
-              placeholder="Gender"
-            />
-          </Form.Group>
-          <Form.Group inline>
-            <label>Size</label>
-            <Form.Radio
-              label="Small"
-              value="sm"
-              checked={value === "sm"}
-              onChange={this.handleChange}
-            />
-            <Form.Radio
-              label="Medium"
-              value="md"
-              checked={value === "md"}
-              onChange={this.handleChange}
-            />
-            <Form.Radio
-              label="Large"
-              value="lg"
-              checked={value === "lg"}
-              onChange={this.handleChange}
-            />
-          </Form.Group>
+    const { activeIndex } = this.state;
 
-          <Form.Button>Zapisz</Form.Button>
-        </Form>
-      </Segment>
+    return (
+      <Segment.Group>
+        <Segment inverted>
+          <Accordion inverted>
+            <Accordion.Title
+              active={activeIndex === 0}
+              index={0}
+              onClick={this.handleClick}
+            >
+              <Icon name="dropdown" />
+              Formularz
+            </Accordion.Title>
+            <Accordion.Content active={activeIndex === 0}>
+              <Form inverted>
+                <Localization />
+                <Form.Group widths="equal">
+                  <Form.Select
+                    fluid
+                    label="Wybierz paczkomat z listy"
+                    options={this.state.options}
+                    placeholder="..."
+                  />
+                </Form.Group>
+                <Form.Button>Zapisz</Form.Button>
+              </Form>
+            </Accordion.Content>
+          </Accordion>
+        </Segment>
+      </Segment.Group>
     );
   }
 }

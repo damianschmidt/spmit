@@ -6,3 +6,7 @@ Content-Type: application/json
   "courier_latitude": 51.0, 
   "courier_longitude": 17.0
 }
+
+###
+GET http://localhost:5000/api/1/lockers
+
