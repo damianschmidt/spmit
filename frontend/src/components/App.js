@@ -6,12 +6,12 @@ import RoadDetailForm from "./RoadDetailForm";
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <>
         <HeaderBar />
         <Container>
           <RoadDetailForm />
         </Container>
-      </div>
+      </>
     );
   }
 }

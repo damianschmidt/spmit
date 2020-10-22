@@ -21,7 +21,7 @@ export class Localization extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <Header inverted size="small">
           Lokalizacja
         </Header>
@@ -48,7 +48,7 @@ export class Localization extends React.Component {
             />
           </Form.Group>
         </Segment>
-      </div>
+      </>
     );
   }
 }
