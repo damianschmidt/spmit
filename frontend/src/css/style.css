@@ -1,0 +1,8 @@
+body {
+  margin: 0;
+  background-image: url('../img/prism.png');
+}
+
+.container-header {
+  padding: 10px 0;
+}
