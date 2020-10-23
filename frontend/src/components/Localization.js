@@ -1,56 +1,83 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox, Form, Header, Segment } from "semantic-ui-react";
 
-export class Localization extends React.Component {
-  state = { lat: 0, lon: 0, errorMessage: "", status: true };
+const Localization = () => {
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [status, setStatus] = useState(false);
 
-  componentDidMount() {
+  useEffect(() => {
     window.navigator.geolocation.getCurrentPosition(
-      (position) =>
-        this.setState({
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
-        }),
-      (err) => this.setState({ errorMessage: err.message })
+      (position) => {},
+      (err) => setErrorMessage(err.message)
     );
-  }
+  }, []);
 
-  toggleStatus = (e) => {
-    this.setState({ status: !this.state.status });
+  const toggleStatus = (e) => {
+    setStatus(!status);
+    if (!status) {
+      window.navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLat(position.coords.latitude);
+          setLon(position.coords.longitude);
+        },
+        (err) => setErrorMessage(err.message)
+      );
+    } else {
+      setLat("");
+      setLon("");
+    }
   };
 
-  render() {
-    return (
-      <>
-        <Header inverted size="small">
-          Lokalizacja
-        </Header>
-        <Checkbox
-          onChange={this.toggleStatus}
-          label="Automatyczna lokalizacja"
-          defaultChecked
-        />
-        <Segment inverted>
-          <Form.Group widths="equal">
-            <Form.Input
-              fluid
-              label="Długość geograficzna"
-              placeholder="..."
-              value={this.state.lon}
-              disabled={this.state.status}
-            />
-            <Form.Input
-              fluid
-              label="Szerokość geograficzna"
-              placeholder="..."
-              value={this.state.lat}
-              disabled={this.state.status}
-            />
-          </Form.Group>
-        </Segment>
-      </>
-    );
-  }
-}
+  const renderCheckBox = () => {
+    if (errorMessage) {
+      return (
+        <>
+          <Checkbox
+            onChange={toggleStatus}
+            label="Automatyczna lokalizacja niedostępna"
+            disabled={true}
+          />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Checkbox
+            onChange={toggleStatus}
+            label="Automatyczna lokalizacja"
+            disabled={false}
+          />
+        </>
+      );
+    }
+  };
+
+  return (
+    <>
+      <Header inverted size="small">
+        Lokalizacja
+      </Header>
+      {renderCheckBox()}
+      <Segment inverted style={{ margin: 0, paddingBottom: 0 }}>
+        <Form.Group widths="equal">
+          <Form.Input
+            fluid
+            label="Długość geograficzna"
+            placeholder={status ? lon : "..."}
+            disabled={status}
+          />
+          <Form.Input
+            fluid
+            label="Szerokość geograficzna"
+            placeholder={status ? lat : "..."}
+            disabled={status}
+          />
+        </Form.Group>
+      </Segment>
+    </>
+  );
+};
 
 export default Localization;
