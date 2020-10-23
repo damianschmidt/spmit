@@ -15,7 +15,7 @@ const RoadDetailsForm = () => {
       <Accordion inverted>
         <Accordion.Title active={activeIndex} index={0} onClick={handleClick}>
           <Icon name="dropdown" />
-          Fomrularz
+          Formularz
         </Accordion.Title>
         <Accordion.Content active={activeIndex}>
           <Form inverted>

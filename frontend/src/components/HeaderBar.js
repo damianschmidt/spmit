@@ -7,13 +7,7 @@ const HeaderBar = () => {
     <Menu inverted>
       <Container>
         <Menu.Item as="a" header>
-          <Image
-            size="mini"
-            src={logoImage}
-            style={{
-              marginRight: "1.5em",
-            }}
-          />
+          <Image size="mini" src={logoImage} className="logo-img" />
           SPMiT
         </Menu.Item>
       </Container>

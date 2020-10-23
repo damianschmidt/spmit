@@ -3,7 +3,7 @@ import { Container } from "semantic-ui-react";
 import HeaderBar from "./components/HeaderBar";
 import RoadDetailForm from "./components/RoadDetailsForm";
 
-function App() {
+const App = () => {
   return (
     <>
       <HeaderBar />
@@ -12,6 +12,6 @@ function App() {
       </Container>
     </>
   );
-}
+};
 
 export default App;
