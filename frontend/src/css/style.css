@@ -10,3 +10,12 @@ body {
 .logo-img {
   margin-right: 1.5rem;
 }
+
+.localization-form {
+  margin: 0;
+  padding-top: 0;
+}
+
+.form-header {
+  margin-top: 0;
+}
