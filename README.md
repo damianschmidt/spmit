@@ -51,7 +51,7 @@ Po zbudowaniu kontenera dostępne powinno być API. Można to sprawdzić wchodz�
 
 Przykładowe zapytanie za pomocą cURL, które można wysłać na backend:
 ```bash
-curl -X GET -H "Content-type: application/json" -H "Accept: application/json" -d '{"lockers_list": ["WRO88M","WRO911","WRO33A"], "courier_latitude": 51.0, "courier_longitude": 17.0}' "http://localhost:5000/api/1/lockers/route"
+curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"lockers_list": ["WRO88M","WRO911","WRO33A"], "courier_latitude": 51.0, "courier_longitude": 17.0}' "http://localhost:5000/api/1/lockers/route"
 ```
 
 Dodano do skryptu również frontend. Ponieważ kontener buduje sobie aplikacje na podstawie folderu node_modules trzeba uprzednio wejść lokalnie w `/spmit/frontend`, a następnie wpisać komendę:
