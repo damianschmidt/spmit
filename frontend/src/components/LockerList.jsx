@@ -38,7 +38,7 @@ const LockerList = ({ lockers, setLockers }) => {
 
   return (
     <>
-      <Header size="small" inverted style={{ marginTop: 0 }}>
+      <Header size="small" inverted className="form-header">
         Lista paczkomatów
       </Header>
 

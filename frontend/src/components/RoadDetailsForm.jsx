@@ -9,7 +9,7 @@ const RoadDetailsForm = ({ setLockersResultList }) => {
   const [latitude, setlatitude] = useState(null);
   const [longtitude, setlongtitude] = useState(null);
   const [lockers, setLockers] = useState([]);
-  const [lockerError, setLockerError] = useState(false);
+  const [lockerErrorState, setLockerErrorState] = useState(false);
 
   const handleClick = (e) => {
     setActiveIndex(!activeIndex);
@@ -19,9 +19,9 @@ const RoadDetailsForm = ({ setLockersResultList }) => {
     e.preventDefault();
 
     if (lockers.length === 0) {
-      setLockerError(true);
+      setLockerErrorState(true);
     } else {
-      setLockerError(false);
+      setLockerErrorState(false);
       const lockersArray = lockers.map((element) => element.text);
 
       const response = await axios.post(
@@ -47,7 +47,7 @@ const RoadDetailsForm = ({ setLockersResultList }) => {
           Formularz
         </Accordion.Title>
         <Accordion.Content active={activeIndex}>
-          <Form error={lockerError} inverted onSubmit={onButtonSubmit}>
+          <Form error={lockerErrorState} inverted onSubmit={onButtonSubmit}>
             <Localization
               latitude={latitude}
               setlatitude={setlatitude}

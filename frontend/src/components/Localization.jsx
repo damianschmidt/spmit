@@ -41,13 +41,13 @@ const Localization = ({ latitude, setlatitude, longtitude, setlongtitude }) => {
       "Automatyczna lokalizacja" +
       (localizationErrorMessage ? "niedostępna" : "");
     return (
-      <React.Fragment>
+      <>
         <Checkbox
           onChange={toggleStatus}
           label={message}
           disabled={!!localizationErrorMessage}
         />
-      </React.Fragment>
+      </>
     );
   };
 

@@ -2,7 +2,7 @@
 GET http://localhost:5000/api/1/lockers
 
 ### 
-GET http://localhost:5000/api/1/lockers/route
+POST http://localhost:5000/api/1/lockers/route
 Content-Type: application/json
 
 {
