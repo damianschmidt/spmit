@@ -4,7 +4,7 @@ import Localization from "./Localization";
 import LockerList from "./LockerList";
 import axios from "axios";
 
-const RoadDetailsForm = () => {
+const RoadDetailsForm = ({ setLockersResultList }) => {
   const [activeIndex, setActiveIndex] = useState(true);
   const [latitude, setlatitude] = useState(null);
   const [longtitude, setlongtitude] = useState(null);
@@ -23,14 +23,19 @@ const RoadDetailsForm = () => {
     } else {
       setLockerError(false);
       const lockersArray = lockers.map((element) => element.text);
-      console.log("send: ", latitude, longtitude, lockersArray);
 
-      const response = await axios.get(
-        "http://localhost:5000/api/1/lockers",
-        {}
+      const response = await axios.post(
+        "http://localhost:5000/api/1/lockers/route",
+        {
+          lockers_list: lockersArray,
+          courier_latitude: 51.0,
+          courier_longitude: 17.0,
+        }
       );
 
-      console.log(response);
+      setLockersResultList(response.data);
+
+      setActiveIndex(!activeIndex);
     }
   };
 
