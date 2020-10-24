@@ -42,9 +42,9 @@ def christofides_algorithm(lockers_list, pair_route_time):
     odd_vertexes = find_odd_vertexes(mst)
     minimum_weight_matching(mst, graph, odd_vertexes)
     eulerian_tour = find_eulerian_tour(mst, graph)
-    path, length = take_shortcuts(eulerian_tour, graph)
+    path, cost = take_shortcuts(eulerian_tour, graph)
     reordered_path = start_from_courier(path)
-    return reordered_path, length
+    return reordered_path, cost
 
 
 def build_graph(lockers_list, pair_route_time):
@@ -70,9 +70,9 @@ def get_cost(a, b, cost_dict):
 def minimum_spanning_tree(graph):
     tree = []
     subtrees = UnionFind()
-    for W, u, v in sorted((graph[u][v], u, v) for u in graph for v in graph[u]):
+    for cost, u, v in sorted((graph[u][v], u, v) for u in graph for v in graph[u]):
         if subtrees[u] != subtrees[v]:
-            tree.append((u, v, W))
+            tree.append((u, v, cost))
             subtrees.union(u, v)
     return tree
 
@@ -101,15 +101,15 @@ def minimum_weight_matching(mst, graph, odd_vertexes):
 
     while odd_vertexes:
         v = odd_vertexes.pop()
-        length = float("inf")
+        cost = float("inf")
         closest = 0
 
         for u in odd_vertexes:
-            if v != u and graph[v][u] < length:
-                length = graph[v][u]
+            if v != u and graph[v][u] < cost:
+                cost = graph[v][u]
                 closest = u
 
-        mst.append((v, closest, length))
+        mst.append((v, closest, cost))
         odd_vertexes.remove(closest)
 
 
@@ -156,17 +156,17 @@ def take_shortcuts(eulerian_tour, graph):
     current = eulerian_tour[0]
     path = [current]
     visited = []
-    length = 0
+    cost = 0
 
     for v in eulerian_tour[1:]:
         if v not in visited:
             path.append(v)
             visited.append(v)
 
-            length += graph[current][v]
+            cost += graph[current][v]
             current = v
 
-    return path, length
+    return path, cost
 
 
 def start_from_courier(path):
