@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox, Form, Header, Segment } from "semantic-ui-react";
 
-const Localization = () => {
-  const [latitude, setlatitude] = useState(null);
-  const [longtitude, setlongtitude] = useState(null);
+const Localization = ({ latitude, setlatitude, longtitude, setlongtitude }) => {
   const [localizationErrorMessage, setlocalizationErrorMessage] = useState("");
   const [checkboxStatus, setCheckboxStatus] = useState(false);
 
@@ -27,6 +25,14 @@ const Localization = () => {
     } else {
       setlatitude(null);
       setlongtitude(null);
+    }
+  };
+
+  const onInputChange = (e, { value, index }) => {
+    if (index === 0) {
+      setlongtitude(value);
+    } else {
+      setlatitude(value);
     }
   };
 
@@ -55,15 +61,21 @@ const Localization = () => {
         <Form.Group widths="equal">
           <Form.Input
             fluid
+            required
             label="Długość geograficzna"
             placeholder={checkboxStatus ? longtitude : "..."}
             disabled={checkboxStatus}
+            index={0}
+            onChange={onInputChange}
           />
           <Form.Input
             fluid
+            required
             label="Szerokość geograficzna"
             placeholder={checkboxStatus ? latitude : "..."}
             disabled={checkboxStatus}
+            index={1}
+            onChange={onInputChange}
           />
         </Form.Group>
       </Segment>

@@ -1,4 +1,8 @@
-GET http://localhost:5000/api/1/lockers/route
+###
+GET http://localhost:5000/api/1/lockers
+
+### 
+POST http://localhost:5000/api/1/lockers/route
 Content-Type: application/json
 
 {
@@ -6,7 +10,4 @@ Content-Type: application/json
   "courier_latitude": 51.0, 
   "courier_longitude": 17.0
 }
-
-###
-GET http://localhost:5000/api/1/lockers
 
