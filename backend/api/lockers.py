@@ -17,10 +17,10 @@ def get_lockers():
     return jsonify(lockers), 200
 
 
-@LOCKERS.route('/route', methods=['GET'])
+@LOCKERS.route('/route', methods=['POST'])
 def get_route():
     """
-    GET args:
+    POST args:
         lockers_list: (list) name of chosen lockers
         courier_latitude: (float)
         courier_longitude: (float)
