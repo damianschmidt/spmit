@@ -43,7 +43,8 @@ def christofides_algorithm(lockers_list, pair_route_time):
     minimum_weight_matching(mst, graph, odd_vertexes)
     eulerian_tour = find_eulerian_tour(mst, graph)
     path, length = take_shortcuts(eulerian_tour, graph)
-    return path, length
+    reordered_path = start_from_courier(path)
+    return reordered_path, length
 
 
 def build_graph(lockers_list, pair_route_time):
@@ -166,3 +167,8 @@ def take_shortcuts(eulerian_tour, graph):
             current = v
 
     return path, length
+
+
+def start_from_courier(path):
+    index = path.index('courier')
+    return path[index:] + path[1:index + 1]
