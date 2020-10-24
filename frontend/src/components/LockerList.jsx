@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import uniqid from "uniqid";
 import { Form, Header, List } from "semantic-ui-react";
+import Locker from "./Locker";
 
-const LockerList = () => {
+const LockerList = ({ lockers, setLockers }) => {
   const [options, setOptions] = useState([]);
+  const [lockerName, setLockerName] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -23,22 +25,45 @@ const LockerList = () => {
     })();
   }, []);
 
+  const handleChange = (e, { value }) => {
+    setLockerName(value);
+  };
+
+  const handleClick = (e) => {
+    if (lockerName) {
+      setLockers([...lockers, { text: lockerName, id: uniqid() }]);
+    }
+    setLockerName("");
+  };
+
   return (
     <>
-      <Header size="small" inverted className="form-header">
+      <Header size="small" inverted style={{ marginTop: 0 }}>
         Lista paczkomatów
       </Header>
 
       <Form.Group widths="equal">
         <Form.Select
+          search
           fluid
           options={options}
           placeholder="Wybierz paczkomat z listy"
+          onChange={handleChange}
+          value={lockerName}
         />
-        <Form.Button positive>Dodaj</Form.Button>
+        <Form.Button type="button" positive onClick={handleClick}>
+          Dodaj
+        </Form.Button>
       </Form.Group>
       <List as="ol" inverted>
-        lista
+        {lockers.map((locker) => (
+          <Locker
+            locker={locker}
+            key={locker.id}
+            lockers={lockers}
+            setLockers={setLockers}
+          />
+        ))}
       </List>
     </>
   );
