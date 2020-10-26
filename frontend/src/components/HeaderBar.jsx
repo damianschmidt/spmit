@@ -1,15 +1,18 @@
 import React from "react";
 import { Container, Image, Menu } from "semantic-ui-react";
 import logoImage from "../img/logo.png";
+import Link from "./Link";
 
 const HeaderBar = () => {
   return (
     <Menu inverted>
       <Container>
-        <Menu.Item as="a" header>
+        <Link href="/">
           <Image size="mini" src={logoImage} className="logo-img" />
           SPMiT
-        </Menu.Item>
+        </Link>
+        <Link href="/">Home</Link>
+        <Link href="/login">Login</Link>
       </Container>
     </Menu>
   );
