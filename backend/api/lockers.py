@@ -17,6 +17,14 @@ def get_lockers():
     return jsonify(lockers), 200
 
 
+@LOCKERS.route('/<district>', methods=['GET'])
+def get_lockers_from_district(district):
+    lockers_db = LockersDbTools()
+    lockers = lockers_db.get_lockers()
+    filtered_lockers = [locker for locker in lockers if locker['district'] == district]
+    return jsonify(filtered_lockers), 200
+
+
 @LOCKERS.route('/route', methods=['POST'])
 def get_route():
     """
@@ -25,7 +33,6 @@ def get_route():
         courier_latitude: (float)
         courier_longitude: (float)
     """
-
     try:
         data_dict = LOCKER_OPTIMAL_ROUTE_SCHEMA.load(request.get_json())
     except ValidationError as error:
@@ -36,5 +43,4 @@ def get_route():
     courier_longitude = data_dict['courier_latitude']
 
     optimal_route = get_optimal_route(lockers_list, courier_latitude, courier_longitude)
-
     return jsonify(optimal_route), 200
