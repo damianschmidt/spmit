@@ -2,6 +2,7 @@ import click
 
 from backend import create_app
 from backend.db_interfaces.lockers import LockersDbTools
+from backend.db_interfaces.users import UsersDbTools
 
 app = create_app()
 
@@ -81,8 +82,43 @@ def init_parcel_lockers():
     lockers_db.add_many_lockers(parcel_lockers)
 
 
+def init_users():
+    click.echo('Initializing collection with users.')
+    users_db = UsersDbTools()
+
+    users = [
+        {
+            'username': 'admin',
+            'password': 'admin_password',
+            'role': 'admin',
+            'district': None
+        },
+        {
+            'username': 'damianschmidt',
+            'password': 'damianschmidt_password',
+            'role': 'courier',
+            'district': 'srodmiescie'
+        },
+        {
+            'username': 'kamildudek',
+            'password': 'kamildudek_password',
+            'role': 'courier',
+            'district': 'fabryczna'
+        },
+        {
+            'username': 'aleksanderatamanczuk',
+            'password': 'aleksanderatamanczuk_password',
+            'role': 'courier',
+            'district': 'gaj'
+        },
+    ]
+
+    users_db.add_many_users(users)
+
+
 @app.cli.command('init_db')
 def init_db():
     click.echo('Starting database initialization.')
     init_parcel_lockers()
+    init_users()
     click.echo('Database initialized.')
