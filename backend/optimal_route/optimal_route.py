@@ -16,8 +16,8 @@ def get_optimal_route(lockers_list, courier_latitude, courier_longitude):
     lockers_combinations = list(combinations(lockers_list, 2))
 
     pair_route_time = get_pair_route_time_dict(lockers_combinations, lockers_dicts)
-    path, _ = christofides_algorithm(lockers_list, pair_route_time)
-    return path
+    path, cost = christofides_algorithm(lockers_list, pair_route_time)
+    return {'path': path, 'cost': cost}
 
 
 def get_route_time(a_coords, b_coords):

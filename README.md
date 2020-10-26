@@ -49,9 +49,14 @@ W przypadku błędu `standard_init_linux.go:211: exec user process caused „no 
 
 Po zbudowaniu kontenera dostępne powinno być API. Można to sprawdzić wchodząć w przeglądarce pod adres `localhost:5000/api/1`.
 
-Przykładowe zapytanie za pomocą cURL, które można wysłać na backend:
+Przykładowe zapytanie za pomocą cURL, które można wysłać na backend pytając o optymalną drogę:
 ```bash
 curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"lockers_list": ["WRO88M","WRO911","WRO33A"], "courier_latitude": 51.0, "courier_longitude": 17.0}' "http://localhost:5000/api/1/lockers/route"
+```
+
+Jeśli chcemy otrzymać wskazówki:
+```bash
+curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"path": ["courier", "WRO88M","WRO911","WRO33A", "courier"], "courier_latitude": 51.09907, "courier_longitude": 17.027580}' "http://localhost:5000/api/1/here_api/directions"
 ```
 
 Dodano do skryptu również frontend. Ponieważ kontener buduje sobie aplikacje na podstawie folderu node_modules trzeba uprzednio wejść lokalnie w `/spmit/frontend`, a następnie wpisać komendę:
