@@ -91,7 +91,7 @@ def init_users():
             'username': 'admin',
             'password': 'admin_password',
             'role': 'admin',
-            'district': None
+            'district': 'None'
         },
         {
             'username': 'damianschmidt',
