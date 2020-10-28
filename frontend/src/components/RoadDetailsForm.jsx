@@ -12,7 +12,6 @@ const RoadDetailsForm = ({
   setlongtitude,
 }) => {
   const [activeIndex, setActiveIndex] = useState(true);
-
   const [lockers, setLockers] = useState([]);
   const [lockerErrorState, setLockerErrorState] = useState(false);
 
