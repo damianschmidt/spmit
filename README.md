@@ -51,7 +51,7 @@ Po zbudowaniu kontenera dostępne powinno być API. Można to sprawdzić wchodz�
 
 Przykładowe zapytanie za pomocą cURL, które można wysłać na backend pytając o optymalną drogę:
 ```bash
-curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"lockers_list": ["WRO88M","WRO911","WRO33A"], "courier_latitude": 51.0, "courier_longitude": 17.0}' "http://localhost:5000/api/1/lockers/route"
+curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"lockers_list": ["WRO88M","WRO911","WRO33A"], "courier_latitude": 51.09907, "courier_longitude": 17.027580}' "http://localhost:5000/api/1/lockers/route"
 ```
 
 Jeśli chcemy otrzymać wskazówki:
