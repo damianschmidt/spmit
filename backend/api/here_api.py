@@ -37,7 +37,7 @@ def direction():
 
     path = data_dict['path']
     courier_latitude = data_dict['courier_latitude']
-    courier_longitude = data_dict['courier_latitude']
+    courier_longitude = data_dict['courier_longitude']
     directions = get_directions(path, courier_latitude, courier_longitude)
 
     return jsonify(directions), 200

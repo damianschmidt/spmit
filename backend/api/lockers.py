@@ -40,7 +40,7 @@ def get_route():
 
     lockers_list = data_dict['lockers_list'] + ['courier']
     courier_latitude = data_dict['courier_latitude']
-    courier_longitude = data_dict['courier_latitude']
+    courier_longitude = data_dict['courier_longitude']
 
     optimal_route = get_optimal_route(lockers_list, courier_latitude, courier_longitude)
     return jsonify(optimal_route), 200
