@@ -4,10 +4,14 @@ import Localization from "./Localization";
 import LockerList from "./LockerList";
 import axios from "axios";
 
-const RoadDetailsForm = ({ setLockersResultList }) => {
+const RoadDetailsForm = ({
+  setLockersResultList,
+  latitude,
+  longtitude,
+  setlatitude,
+  setlongtitude,
+}) => {
   const [activeIndex, setActiveIndex] = useState(true);
-  const [latitude, setlatitude] = useState(null);
-  const [longtitude, setlongtitude] = useState(null);
   const [lockers, setLockers] = useState([]);
   const [lockerErrorState, setLockerErrorState] = useState(false);
 
