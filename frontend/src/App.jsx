@@ -3,11 +3,8 @@ import { Container } from "semantic-ui-react";
 import HeaderBar from "./components/HeaderBar";
 import RoadDetailForm from "./components/RoadDetailsForm";
 import Route from "./components/Route";
-<<<<<<< HEAD
 import RoadInfo from "./components/RoadInfo";
-=======
 import LoginForm from "./components/LoginPanel";
->>>>>>> dbc3074... feature: login page only appearance
 
 const App = () => {
   const [latitude, setlatitude] = useState(null);
