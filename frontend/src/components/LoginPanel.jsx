@@ -7,15 +7,21 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
 
   const onButtonSubmit = async (e) => {
-    e.preventDefault();
+    console.log(username);
+    console.log(password);
     const response = await axios.post(
       "http://localhost:5000/api/1/users/login",
       {
-        username: username,
-        password: password,
+        username,
+        password,
       }
     );
     console.log(response);
+    if (response.data) {
+      window.location.pathname = "/";
+    } else {
+      window.alert("Błędne dane!");
+    }
   };
 
   const onInputChange = (e, { value, index }) => {
