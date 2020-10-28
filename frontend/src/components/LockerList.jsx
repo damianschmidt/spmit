@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import uniqid from "uniqid";
-import { Form, Header, List } from "semantic-ui-react";
-import Locker from "./Locker";
+import { Checkbox, Grid, Header } from "semantic-ui-react";
 
 const LockerList = ({ lockers, setLockers }) => {
   const [options, setOptions] = useState([]);
-  const [lockerName, setLockerName] = useState("");
 
   useEffect(() => {
     (async () => {
@@ -25,15 +23,12 @@ const LockerList = ({ lockers, setLockers }) => {
     })();
   }, []);
 
-  const handleChange = (e, { value }) => {
-    setLockerName(value);
-  };
-
-  const handleClick = (e) => {
-    if (lockerName) {
-      setLockers([...lockers, { text: lockerName, id: uniqid() }]);
+  const handleChange = (e, { value, checked }) => {
+    if (checked) {
+      setLockers([...lockers, { text: value, id: uniqid() }]);
+    } else {
+      setLockers(lockers.filter((e) => e.text !== value));
     }
-    setLockerName("");
   };
 
   return (
@@ -41,30 +36,19 @@ const LockerList = ({ lockers, setLockers }) => {
       <Header size="small" inverted className="form-header">
         Lista paczkomatów
       </Header>
-
-      <Form.Group widths="equal">
-        <Form.Select
-          search
-          fluid
-          options={options}
-          placeholder="Wybierz paczkomat z listy"
-          onChange={handleChange}
-          value={lockerName}
-        />
-        <Form.Button type="button" positive onClick={handleClick}>
-          Dodaj
-        </Form.Button>
-      </Form.Group>
-      <List as="ol" inverted>
-        {lockers.map((locker) => (
-          <Locker
-            locker={locker}
-            key={locker.id}
-            lockers={lockers}
-            setLockers={setLockers}
-          />
-        ))}
-      </List>
+      <Grid>
+        <Grid.Row columns={3}>
+          {options.map((option) => (
+            <Grid.Column key={option.key}>
+              <Checkbox
+                value={option.value}
+                label={option.text}
+                onChange={handleChange}
+              />
+            </Grid.Column>
+          ))}
+        </Grid.Row>
+      </Grid>
     </>
   );
 };

@@ -3,8 +3,11 @@ import { Container } from "semantic-ui-react";
 import HeaderBar from "./components/HeaderBar";
 import RoadDetailForm from "./components/RoadDetailsForm";
 import Route from "./components/Route";
+import RoadInfo from "./components/RoadInfo";
 
 const App = () => {
+  const [latitude, setlatitude] = useState(null);
+  const [longtitude, setlongtitude] = useState(null);
   const [lockersResultList, setLockersResultList] = useState({});
 
   return (
@@ -12,11 +15,18 @@ const App = () => {
       <HeaderBar />
       <Route path="/">
         <Container>
-          <RoadDetailForm setLockersResultList={setLockersResultList} />
-          {/* for test only */}
-          <h1 style={{ color: "white" }}>
-            Odp:{JSON.stringify(lockersResultList)}
-          </h1>
+          <RoadDetailForm
+            setLockersResultList={setLockersResultList}
+            latitude={latitude}
+            longtitude={longtitude}
+            setlatitude={setlatitude}
+            setlongtitude={setlongtitude}
+          />
+          <RoadInfo
+            lockersResultList={lockersResultList}
+            latitude={latitude}
+            longtitude={longtitude}
+          />
         </Container>
       </Route>
       <Route path="/login">
