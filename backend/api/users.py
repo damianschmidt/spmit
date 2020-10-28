@@ -96,7 +96,7 @@ def login():
     user_index = {'username': data_dict['username']}
     user = users_db.get_user(user_index)
     if not user:
-        return jsonify(False), 404
+        return jsonify(False), 200
 
     result = True if user['password'] == data_dict['password'] else False
     return jsonify(result), 200
