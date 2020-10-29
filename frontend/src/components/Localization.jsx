@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Checkbox, Form, Header, Segment } from "semantic-ui-react";
 
-const Localization = ({ latitude, setlatitude, longtitude, setlongtitude }) => {
-  const [localizationErrorMessage, setlocalizationErrorMessage] = useState("");
+const Localization = ({ latitude, setLatitude, longtitude, setLongtitude }) => {
+  const [localizationErrorMessage, setLocalizationErrorMessage] = useState("");
   const [checkboxStatus, setCheckboxStatus] = useState(false);
 
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition(
       function () {},
-      (err) => setlocalizationErrorMessage(err.message)
+      (err) => setLocalizationErrorMessage(err.message)
     );
   }, []);
 
@@ -17,22 +17,22 @@ const Localization = ({ latitude, setlatitude, longtitude, setlongtitude }) => {
     if (!checkboxStatus) {
       window.navigator.geolocation.getCurrentPosition(
         (position) => {
-          setlatitude(position.coords.latitude);
-          setlongtitude(position.coords.longitude);
+          setLatitude(position.coords.latitude);
+          setLongtitude(position.coords.longitude);
         },
-        (err) => setlocalizationErrorMessage(err.message)
+        (err) => setLocalizationErrorMessage(err.message)
       );
     } else {
-      setlatitude(null);
-      setlongtitude(null);
+      setLatitude(null);
+      setLongtitude(null);
     }
   };
 
   const onInputChange = (e, { value, index }) => {
     if (index === 0) {
-      setlongtitude(value);
+      setLongtitude(value);
     } else {
-      setlatitude(value);
+      setLatitude(value);
     }
   };
 

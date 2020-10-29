@@ -4,10 +4,11 @@ import HeaderBar from "./components/HeaderBar";
 import RoadDetailForm from "./components/RoadDetailsForm";
 import Route from "./components/Route";
 import RoadInfo from "./components/RoadInfo";
+import LoginForm from "./components/LoginPanel";
 
 const App = () => {
-  const [latitude, setlatitude] = useState(null);
-  const [longtitude, setlongtitude] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longtitude, setLongtitude] = useState(null);
   const [lockersResultList, setLockersResultList] = useState({});
 
   return (
@@ -19,8 +20,8 @@ const App = () => {
             setLockersResultList={setLockersResultList}
             latitude={latitude}
             longtitude={longtitude}
-            setlatitude={setlatitude}
-            setlongtitude={setlongtitude}
+            setLatitude={setLatitude}
+            setLongtitude={setLongtitude}
           />
           <RoadInfo
             lockersResultList={lockersResultList}
@@ -31,7 +32,7 @@ const App = () => {
       </Route>
       <Route path="/login">
         <Container>
-          <div>Here will be login panel</div>
+          <LoginForm />
         </Container>
       </Route>
     </>

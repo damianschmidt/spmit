@@ -20,11 +20,16 @@ body {
   margin-top: 0 !important;
 }
 
-.delete-icon {
-  margin-left: 0.5rem !important;
-  color: #ffffffe6;
+.login-header {
+  color: #ff8c00 !important;
+  text-align: center;
 }
 
-.delete-icon:hover {
-  color: tomato;
+.login-grid {
+  height: 90vh;
+  margin: auto;
+}
+
+.login-grid-column{
+  max-width: 450px !important;
 }

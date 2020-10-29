@@ -8,8 +8,8 @@ const RoadDetailsForm = ({
   setLockersResultList,
   latitude,
   longtitude,
-  setlatitude,
-  setlongtitude,
+  setLatitude,
+  setLongtitude,
 }) => {
   const [activeIndex, setActiveIndex] = useState(true);
   const [lockers, setLockers] = useState([]);
@@ -54,9 +54,9 @@ const RoadDetailsForm = ({
           <Form error={lockerErrorState} inverted onSubmit={onButtonSubmit}>
             <Localization
               latitude={latitude}
-              setlatitude={setlatitude}
+              setLatitude={setLatitude}
               longtitude={longtitude}
-              setlongtitude={setlongtitude}
+              setLongtitude={setLongtitude}
             />
             <LockerList lockers={lockers} setLockers={setLockers} />
             <Message
