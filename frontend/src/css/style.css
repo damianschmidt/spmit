@@ -22,15 +22,15 @@ body {
 
 .delete-icon {
   margin-left: 0.5rem !important;
-  color: white;
+  color: #ffffffe6;
 }
 
 .delete-icon:hover {
-  color: tomato;
+  color: #ff6347;
 }
 
 .login-header {
-  color: darkorange !important;
+  color: #ff8c00 !important;
   text-align: center;
 }
 
