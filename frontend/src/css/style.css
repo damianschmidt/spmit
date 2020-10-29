@@ -1,7 +1,6 @@
 body {
   margin: 0;
   background-image: url("../img/prism.png");
-  padding: 0;
 }
 
 .container-header {
@@ -28,18 +27,4 @@ body {
 
 .delete-icon:hover {
   color: tomato;
-}
-
-.login-header {
-  color: rgb(250, 111, 30) !important;
-  text-align: center;
-}
-
-.login-grid {
-  height: 90vh;
-  margin: auto;
-}
-
-.login-grid-column{
-  max-width: 450px !important;
 }
