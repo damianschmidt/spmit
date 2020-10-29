@@ -7,8 +7,6 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
 
   const onButtonSubmit = async (e) => {
-    console.log(username);
-    console.log(password);
     const response = await axios.post(
       "http://localhost:5000/api/1/users/login",
       {
@@ -16,7 +14,7 @@ const LoginForm = () => {
         password,
       }
     );
-    console.log(response);
+
     if (response.data) {
       window.location.pathname = "/";
     } else {
