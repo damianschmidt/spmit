@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Segment,
+  Message,
+} from "semantic-ui-react";
 import axios from "axios";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [dataErrorState, setdataErrorState] = useState(false);
 
   const onButtonSubmit = async (e) => {
     const response = await axios.post(
@@ -18,7 +26,7 @@ const LoginForm = () => {
     if (response.data) {
       window.location.pathname = "/";
     } else {
-      window.alert("Błedne dane!");
+      setdataErrorState(true);
     }
   };
 
@@ -41,7 +49,12 @@ const LoginForm = () => {
         <Header as="h2" className="login-header">
           Zaloguj się
         </Header>
-        <Form size="large" inverted onSubmit={onButtonSubmit}>
+        <Form
+          error={dataErrorState}
+          size="large"
+          inverted
+          onSubmit={onButtonSubmit}
+        >
           <Segment stacked inverted>
             <Form.Input
               fluid
@@ -62,6 +75,7 @@ const LoginForm = () => {
               index={1}
               onChange={onInputChange}
             />
+            <Message error header="Błędne dane!" content="Spróbuj ponownie" />
             <Button color="orange" fluid size="large">
               Login
             </Button>
