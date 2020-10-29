@@ -20,7 +20,7 @@ const LoginForm = () => {
     if (response.data) {
       window.location.pathname = "/";
     } else {
-      window.alert("Błedne hasło");
+      window.alert("Błedne dane!");
     }
   };
 
@@ -64,7 +64,6 @@ const LoginForm = () => {
               index={1}
               onChange={onInputChange}
             />
-
             <Button color="orange" fluid size="large">
               Login
             </Button>
