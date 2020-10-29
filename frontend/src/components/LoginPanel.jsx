@@ -20,7 +20,7 @@ const LoginForm = () => {
     if (response.data) {
       window.location.pathname = "/";
     } else {
-      window.alert("Błędne dane!");
+      window.alert("Błedne hasło");
     }
   };
 
@@ -33,19 +33,24 @@ const LoginForm = () => {
   };
 
   return (
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="teal" textAlign="center">
+    <Grid
+      className="login-grid"
+      textAlign="center"
+      verticalAlign="middle"
+      container
+    >
+      <Grid.Column className="login-grid-column">
+        <Header as="h2" className="login-header">
           Zaloguj się
         </Header>
-        <Form size="large" onSubmit={onButtonSubmit}>
-          <Segment stacked>
+        <Form size="large" inverted onSubmit={onButtonSubmit}>
+          <Segment stacked inverted>
             <Form.Input
               fluid
               required
               icon="user"
               iconPosition="left"
-              placeholder="Username"
+              placeholder="Nazwa użytkownika"
               index={0}
               onChange={onInputChange}
             />
@@ -54,13 +59,13 @@ const LoginForm = () => {
               required
               icon="lock"
               iconPosition="left"
-              placeholder="Password"
+              placeholder="Hasło"
               type="password"
               index={1}
               onChange={onInputChange}
             />
 
-            <Button color="teal" fluid size="large">
+            <Button color="orange" fluid size="large">
               Login
             </Button>
           </Segment>
