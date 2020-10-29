@@ -12,9 +12,9 @@ import axios from "axios";
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [dataErrorState, setdataErrorState] = useState(false);
+  const [dataErrorState, setDataErrorState] = useState(false);
 
-  const onButtonSubmit = async (e) => {
+  const onButtonSubmit = async () => {
     const response = await axios.post(
       "http://localhost:5000/api/1/users/login",
       {
@@ -26,7 +26,7 @@ const LoginForm = () => {
     if (response.data) {
       window.location.pathname = "/";
     } else {
-      setdataErrorState(true);
+      setDataErrorState(true);
     }
   };
 

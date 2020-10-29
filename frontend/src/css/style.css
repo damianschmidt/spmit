@@ -22,7 +22,7 @@ body {
 
 .delete-icon {
   margin-left: 0.5rem !important;
-  color: #ffffffe6;
+  color: white;
 }
 
 .delete-icon:hover {
@@ -30,7 +30,7 @@ body {
 }
 
 .login-header {
-  color: rgb(250, 111, 30) !important;
+  color: darkorange !important;
   text-align: center;
 }
 

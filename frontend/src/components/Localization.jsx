@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Checkbox, Form, Header, Segment } from "semantic-ui-react";
 
 const Localization = ({ latitude, setlatitude, longtitude, setlongtitude }) => {
-  const [localizationErrorMessage, setlocalizationErrorMessage] = useState("");
+  const [localizationErrorMessage, setLocalizationErrorMessage] = useState("");
   const [checkboxStatus, setCheckboxStatus] = useState(false);
 
   useEffect(() => {
     window.navigator.geolocation.getCurrentPosition(
       function () {},
-      (err) => setlocalizationErrorMessage(err.message)
+      (err) => setLocalizationErrorMessage(err.message)
     );
   }, []);
 
@@ -20,7 +20,7 @@ const Localization = ({ latitude, setlatitude, longtitude, setlongtitude }) => {
           setlatitude(position.coords.latitude);
           setlongtitude(position.coords.longitude);
         },
-        (err) => setlocalizationErrorMessage(err.message)
+        (err) => setLocalizationErrorMessage(err.message)
       );
     } else {
       setlatitude(null);
