@@ -20,15 +20,6 @@ body {
   margin-top: 0 !important;
 }
 
-.delete-icon {
-  margin-left: 0.5rem !important;
-  color: #ffffffe6;
-}
-
-.delete-icon:hover {
-  color: #ff6347;
-}
-
 .login-header {
   color: #ff8c00 !important;
   text-align: center;
