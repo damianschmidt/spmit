@@ -4,7 +4,6 @@ import HeaderBar from "./components/HeaderBar";
 import RoadDetailForm from "./components/RoadDetailsForm";
 import Route from "./components/Route";
 import RoadInfo from "./components/RoadInfo";
-import LoginForm from "./components/LoginPanel";
 
 const App = () => {
   const [latitude, setlatitude] = useState(null);
@@ -32,7 +31,7 @@ const App = () => {
       </Route>
       <Route path="/login">
         <Container>
-          <LoginForm />
+          <div>Here will be login panel</div>
         </Container>
       </Route>
     </>
