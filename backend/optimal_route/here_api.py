@@ -24,7 +24,8 @@ def get_route(a_latitude, a_longitude, b_latitude, b_longitude):
         'apikey': API_KEY,
         'waypoint0': f'geo!{a_latitude},{a_longitude}',
         'waypoint1': f'geo!{b_latitude},{b_longitude}',
-        'mode': 'fastest;car;traffic:enabled'
+        'mode': 'fastest;car;traffic:enabled',
+        'language': 'pl-pl',
     }
     r = requests.get(url=url, params=params)
     data = r.json()
