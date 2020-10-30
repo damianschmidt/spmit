@@ -6,14 +6,14 @@ import axios from "axios";
 
 const RoadDetailsForm = ({
   setLockersResultList,
-  latitude,
-  longtitude,
   setLatitude,
   setLongtitude,
 }) => {
   const [activeIndex, setActiveIndex] = useState(true);
   const [lockers, setLockers] = useState([]);
   const [lockerErrorState, setLockerErrorState] = useState(false);
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
 
   const handleClick = (e) => {
     setActiveIndex(!activeIndex);
@@ -38,6 +38,8 @@ const RoadDetailsForm = ({
       );
 
       setLockersResultList(response.data);
+      setLatitude(lat);
+      setLongtitude(lng);
 
       setActiveIndex(!activeIndex);
     }
@@ -53,10 +55,10 @@ const RoadDetailsForm = ({
         <Accordion.Content active={activeIndex}>
           <Form error={lockerErrorState} inverted onSubmit={onButtonSubmit}>
             <Localization
-              latitude={latitude}
-              setLatitude={setLatitude}
-              longtitude={longtitude}
-              setLongtitude={setLongtitude}
+              latitude={lat}
+              setLatitude={setLat}
+              longtitude={lng}
+              setLongtitude={setLng}
             />
             <LockerList lockers={lockers} setLockers={setLockers} />
             <Message

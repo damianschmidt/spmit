@@ -18,8 +18,6 @@ const App = () => {
         <Container>
           <RoadDetailForm
             setLockersResultList={setLockersResultList}
-            latitude={latitude}
-            longtitude={longtitude}
             setLatitude={setLatitude}
             setLongtitude={setLongtitude}
           />
