@@ -5,6 +5,7 @@ import RoadDetailForm from "./components/RoadDetailsForm";
 import Route from "./components/Route";
 import RoadInfo from "./components/RoadInfo";
 import LoginForm from "./components/LoginPanel";
+import AdminPanel from "./components/AdminPanel";
 
 const App = () => {
   const [latitude, setLatitude] = useState(null);
@@ -31,6 +32,11 @@ const App = () => {
       <Route path="/login">
         <Container>
           <LoginForm />
+        </Container>
+      </Route>
+      <Route path="/Admin">
+        <Container>
+          <AdminPanel />
         </Container>
       </Route>
     </>

@@ -20,3 +20,6 @@ Content-Type: application/json
    "courier_latitude": 51.09907, 
    "courier_longitude": 17.027580
 }
+
+###
+GET http://localhost:5000/api/1/users
