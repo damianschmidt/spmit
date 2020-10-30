@@ -27,11 +27,11 @@ const AdminPanel = () => {
       <Header size="small" inverted className="form-header">
         Lista kurierów
       </Header>
-      <Grid>
+      <Grid stackable>
         <Grid.Row columns={3}>
           {users.map((user) => (
-            <Grid.Column computer={3} tablet={4} mobile={8} key={user.key}>
-              <Card style={{ minWidth: "100vh" }}>
+            <Grid.Column floated stretched key={user.key}>
+              <Card>
                 <Card.Content header={user.value} />
                 <Card.Content description={"Stanowisko: " + user.role} />
                 <Card.Content description={"Dzielnica: " + user.district} />
