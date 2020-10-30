@@ -39,7 +39,7 @@ const Localization = ({ latitude, setLatitude, longtitude, setLongtitude }) => {
   const renderCheckBox = () => {
     const message =
       "Automatyczna lokalizacja" +
-      (localizationErrorMessage ? "niedostępna" : "");
+      (localizationErrorMessage ? " niedostępna" : "");
     return (
       <>
         <Checkbox

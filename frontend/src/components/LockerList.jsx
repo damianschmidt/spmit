@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import uniqid from "uniqid";
-import { Checkbox, Grid, Header } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
+import CheckboxBtn from "./CheckboxBtn";
 
 const LockerList = ({ lockers, setLockers }) => {
   const [options, setOptions] = useState([]);
@@ -23,14 +24,6 @@ const LockerList = ({ lockers, setLockers }) => {
     })();
   }, []);
 
-  const handleChange = (e, { value, checked }) => {
-    if (checked) {
-      setLockers([...lockers, { text: value, id: uniqid() }]);
-    } else {
-      setLockers(lockers.filter((e) => e.text !== value));
-    }
-  };
-
   return (
     <>
       <Header size="small" inverted className="form-header">
@@ -39,11 +32,11 @@ const LockerList = ({ lockers, setLockers }) => {
       <Grid>
         <Grid.Row columns={3}>
           {options.map((option) => (
-            <Grid.Column key={option.key}>
-              <Checkbox
+            <Grid.Column computer={3} tablet={4} mobile={8} key={option.key}>
+              <CheckboxBtn
                 value={option.value}
-                label={option.text}
-                onChange={handleChange}
+                lockers={lockers}
+                setLockers={setLockers}
               />
             </Grid.Column>
           ))}

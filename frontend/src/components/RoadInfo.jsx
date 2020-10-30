@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Grid, Segment } from "semantic-ui-react";
+import { Grid, Header, Segment } from "semantic-ui-react";
 import Map from "./Map";
 
 const RoadInfo = ({ lockersResultList, latitude, longtitude }) => {
   const [roadInfo, setRoadInfo] = useState("");
+
   useEffect(() => {
     (async () => {
       const response = await axios.post(
@@ -25,8 +26,8 @@ const RoadInfo = ({ lockersResultList, latitude, longtitude }) => {
   return (
     <Grid columns={2} inverted divided stackable reversed="mobile vertically">
       <Grid.Column width={6}>
-        <Segment inverted>
-          Road Details
+        <Segment inverted className="road-info">
+          <Header as="h4" icon="road" content="Road Details" />
           {[...roadInfo].map((e, index) => {
             return (
               <div key={index}>
@@ -40,11 +41,11 @@ const RoadInfo = ({ lockersResultList, latitude, longtitude }) => {
         </Segment>
       </Grid.Column>
       <Grid.Column width={10}>
-        <Map
-          waypoints={lockersResultList.path}
-          latitude={latitude}
-          longtitude={longtitude}
-        />
+        {latitude && longtitude ? (
+          <Map latitude={latitude} longtitude={longtitude} />
+        ) : (
+          <div>Mapa</div>
+        )}
       </Grid.Column>
     </Grid>
   );
