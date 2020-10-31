@@ -66,7 +66,7 @@ Content-Type: application/json
   "username": "test_user", 
   "password": "test_user_password", 
   "role": "courier",
-  "district": "gaj",
+  "district": "gaj"
 }
 
 
@@ -77,7 +77,7 @@ Content-Type: application/json
 
 {
   "username": "kamildudek", 
-  "update_dict": {"district": "new_district"},
+  "update_dict": {"district": "new_district"}
 }
 
 
@@ -87,16 +87,16 @@ DELETE http://localhost:5000/api/1/users
 Content-Type: application/json
 
 {
-  "username": "kamildudek", 
+  "username": "kamildudek"
 }
 
 
 # login user
 ###
-POST http://localhost:5000/api/1/users
+POST http://localhost:5000/api/1/users/login
 Content-Type: application/json
 
 {
   "username": "kamildudek",
-  "password": "kamildudek_password", 
+  "password": "kamildudek_password"
 }
