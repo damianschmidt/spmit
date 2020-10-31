@@ -34,7 +34,7 @@ const AdminPanel = () => {
           <Container textAlign="right">
             <Button icon labelPosition="right">
               <Icon name="arrow right" />
-              <Link href="/modify">Dodaj użytkownika</Link>
+              <Link href="/add-user">Dodaj użytkownika</Link>
             </Button>
           </Container>
         </Grid.Column>
