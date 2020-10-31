@@ -75,8 +75,8 @@ def delete_user():
 
     users_db = UsersDbTools()
     user_index = {'username': data_dict['username']}
-    users_db.update_user(user_index)
-    return jsonify(data_dict), 200
+    users_db.delete_user(user_index)
+    return jsonify(user_index), 200
 
 
 @USERS.route('/login', methods=['POST'])
@@ -86,7 +86,6 @@ def login():
         username: (string)
         password: (string)
     """
-
     try:
         data_dict = LOGIN_USER_SCHEMA.load(request.get_json())
     except ValidationError as error:

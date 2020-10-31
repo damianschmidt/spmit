@@ -16,16 +16,25 @@ class UsersDbTools:
         return user
 
     def add_user(self, user_dict):
-        self._collection.insert_one(user_dict)
+        user_dict_copy = user_dict.copy()
+        self._collection.insert_one(user_dict_copy)
+        
+        return user_dict
 
     def add_many_users(self, user_dicts_list):
-        self._collection.insert(user_dicts_list)
+        user_dicts_list_copy = user_dicts_list.copy()
+        self._collection.insert(user_dicts_list_copy)
+
+        return user_dicts_list
 
     def update_user(self, user_index, user_update_dict):
+        user_update_dict_copy = user_update_dict.copy()
         self._collection.update_one(
             filter=user_index,
-            update={'$set': user_update_dict}
+            update={'$set': user_update_dict_copy}
         )
+
+        return user_update_dict
 
     def delete_user(self, user_index):
         self._collection.delete_one(filter=user_index)

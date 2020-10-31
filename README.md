@@ -59,6 +59,21 @@ Jeśli chcemy otrzymać wskazówki:
 curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"path": ["courier", "WRO88M","WRO911","WRO33A", "courier"], "courier_latitude": 51.09907, "courier_longitude": 17.027580}' "http://localhost:5000/api/1/here_api/directions"
 ```
 
+Dodawanie kuriera:
+```bash
+curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"username": "test_courier", "password": "test_courier_password", "role": "courier", "district": "srodmiescie"}' "http://localhost:5000/api/1/users"
+```
+
+Usuwanie kuriera:
+```bash
+curl -X DELETE -H "Content-type: application/json" -H "Accept: application/json" -d '{"username": "kamildudek"}' "http://localhost:5000/api/1/users"
+```
+
+Aktualizacja kuriera:
+```bash
+curl -X PUT -H "Content-type: application/json" -H "Accept: application/json" -d '{"username": "kamildudek", "update_dict": {"district": "new_district"}}' "http://localhost:5000/api/1/users"
+```
+
 Dodano do skryptu również frontend. Ponieważ kontener buduje sobie aplikacje na podstawie folderu node_modules trzeba uprzednio wejść lokalnie w `/spmit/frontend`, a następnie wpisać komendę:
 ```bash
 npm install
