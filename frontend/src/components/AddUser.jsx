@@ -51,16 +51,14 @@ const AddUser = () => {
 
     if (response.data) {
       setAddSuccessfully(true);
-      setUsername("");
     } else {
       setDataErrorState(true);
     }
   };
 
   const onInputChange = (e, { value, index }) => {
-    if (index === 0 && users.includes(value) == true) {
+    if (index === 0 && users.includes(value) == false) {
       setUsername(value);
-      setDataErrorState(true);
     } else if (index == 1) {
       setPassword(value);
     } else if (index == 2) {
@@ -114,7 +112,7 @@ const AddUser = () => {
                 index={1}
                 onChange={onInputChange}
               />
-              {/* <Form.Input
+              <Form.Input
                 fluid
                 required
                 icon="map"
@@ -122,14 +120,14 @@ const AddUser = () => {
                 placeholder="Dzielnica"
                 index={2}
                 onChange={onInputChange}
-              /> */}
-              <Dropdown
+              />
+              {/* <Dropdown
                 placeholder="Select Country"
                 fluid
                 search
                 selection
                 options={options}
-              />
+              /> */}
               <Message success>
                 <Icon name="check" size="small" />
                 Użytkownik został dodany!
