@@ -40,7 +40,7 @@ const RoadDetailsForm = ({
       );
 
       // validate latitude, longitude
-      if (Number(lat) === lat && Number(lng) === lng) {
+      if (Number(lat) === Number(lat) && Number(lng) === Number(lng)) {
         setLockersResultList(response.data);
         setLatitude(lat);
         setLongtitude(lng);
