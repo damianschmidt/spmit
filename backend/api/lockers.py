@@ -25,6 +25,14 @@ def get_lockers_from_district(district):
     return jsonify(filtered_lockers), 200
 
 
+@LOCKERS.route('/districts', methods=['GET'])
+def get_districts():
+    lockers_db = LockersDbTools()
+    lockers = lockers_db.get_lockers()
+    districts = set([locker['district'] for locker in lockers])
+    return jsonify(list(districts)), 200
+
+
 @LOCKERS.route('/route', methods=['POST'])
 def get_route():
     """
@@ -42,5 +50,6 @@ def get_route():
     courier_latitude = data_dict['courier_latitude']
     courier_longitude = data_dict['courier_longitude']
 
-    optimal_route = get_optimal_route(lockers_list, courier_latitude, courier_longitude)
+    optimal_route = get_optimal_route(
+        lockers_list, courier_latitude, courier_longitude)
     return jsonify(optimal_route), 200
