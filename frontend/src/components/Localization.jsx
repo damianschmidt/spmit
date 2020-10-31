@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Checkbox, Form, Header, Segment } from "semantic-ui-react";
+import { Checkbox, Form, Header, Message, Segment } from "semantic-ui-react";
 
-const Localization = ({ latitude, setLatitude, longtitude, setLongtitude }) => {
+const Localization = ({
+  coordsIsValid,
+  latitude,
+  setLatitude,
+  longtitude,
+  setLongtitude,
+}) => {
   const [localizationErrorMessage, setLocalizationErrorMessage] = useState("");
   const [checkboxStatus, setCheckboxStatus] = useState(false);
 
@@ -78,6 +84,11 @@ const Localization = ({ latitude, setLatitude, longtitude, setLongtitude }) => {
             onChange={onInputChange}
           />
         </Form.Group>
+        <Message
+          error={coordsIsValid}
+          color="red"
+          content="Proszę wpisać tylko cyfry"
+        />
       </Segment>
     </>
   );

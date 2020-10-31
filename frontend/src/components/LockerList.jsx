@@ -4,7 +4,7 @@ import uniqid from "uniqid";
 import { Grid, Header } from "semantic-ui-react";
 import CheckboxBtn from "./CheckboxBtn";
 
-const LockerList = ({ lockers, setLockers }) => {
+const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
@@ -14,6 +14,8 @@ const LockerList = ({ lockers, setLockers }) => {
         {}
       );
 
+      setLockersDetails(response.data);
+
       setOptions(
         [...response.data].map((e) => ({
           key: uniqid(),
@@ -22,7 +24,7 @@ const LockerList = ({ lockers, setLockers }) => {
         }))
       );
     })();
-  }, []);
+  }, [setLockersDetails]);
 
   return (
     <>

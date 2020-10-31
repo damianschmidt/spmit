@@ -3,7 +3,12 @@ import axios from "axios";
 import { Grid, Header, Segment } from "semantic-ui-react";
 import Map from "./Map";
 
-const RoadInfo = ({ lockersResultList, latitude, longtitude }) => {
+const RoadInfo = ({
+  lockersDetails,
+  lockersResultList,
+  latitude,
+  longtitude,
+}) => {
   const [roadInfo, setRoadInfo] = useState("");
 
   useEffect(() => {
@@ -42,9 +47,14 @@ const RoadInfo = ({ lockersResultList, latitude, longtitude }) => {
       </Grid.Column>
       <Grid.Column width={10}>
         {latitude && longtitude ? (
-          <Map latitude={latitude} longtitude={longtitude} />
+          <Map
+            waypoints={lockersResultList.path}
+            latitude={latitude}
+            longtitude={longtitude}
+            lockersDetails={lockersDetails}
+          />
         ) : (
-          <div>Mapa</div>
+          <Map />
         )}
       </Grid.Column>
     </Grid>
