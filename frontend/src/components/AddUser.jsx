@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   Grid,
@@ -8,6 +8,8 @@ import {
   Button,
   Icon,
   Message,
+  Dropdown,
+  Input,
 } from "semantic-ui-react";
 import Link from "./Link";
 
@@ -17,7 +19,28 @@ const AddUser = () => {
   const [district, setDistrict] = useState("");
   const [addSuccessfully, setAddSuccessfully] = useState(false);
   const [dataErrorState, setDataErrorState] = useState(false);
-  console.log(addSuccessfully);
+  const [users, setUsers] = useState([]);
+  const [options, setOptions] = useState([
+    { key: "af", value: "af", flag: "af", text: "Afghanistan" },
+    { key: "ax", value: "ax", flag: "ax", text: "Aland Islands" },
+    { key: "al", value: "al", flag: "al", text: "Albania" },
+    { key: "dz", value: "dz", flag: "dz", text: "Algeria" },
+    { key: "as", value: "as", flag: "as", text: "American Samoa" },
+  ]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get("http://localhost:5000/api/1/users", {});
+
+      setUsers(
+        [...response.data].map((e) => ({
+          value: e.username,
+        }))
+      );
+    })();
+    console.log(setUsers);
+  }, []);
+
   const onButtonSubmit = async () => {
     const response = await axios.post("http://localhost:5000/api/1/users", {
       username,
@@ -28,14 +51,16 @@ const AddUser = () => {
 
     if (response.data) {
       setAddSuccessfully(true);
+      setUsername("");
     } else {
       setDataErrorState(true);
     }
   };
 
   const onInputChange = (e, { value, index }) => {
-    if (index === 0) {
+    if (index === 0 && users.includes(value) == true) {
       setUsername(value);
+      setDataErrorState(true);
     } else if (index == 1) {
       setPassword(value);
     } else if (index == 2) {
@@ -78,6 +103,7 @@ const AddUser = () => {
                 index={0}
                 onChange={onInputChange}
               />
+
               <Form.Input
                 fluid
                 required
@@ -88,7 +114,7 @@ const AddUser = () => {
                 index={1}
                 onChange={onInputChange}
               />
-              <Form.Input
+              {/* <Form.Input
                 fluid
                 required
                 icon="map"
@@ -96,6 +122,13 @@ const AddUser = () => {
                 placeholder="Dzielnica"
                 index={2}
                 onChange={onInputChange}
+              /> */}
+              <Dropdown
+                placeholder="Select Country"
+                fluid
+                search
+                selection
+                options={options}
               />
               <Message success>
                 <Icon name="check" size="small" />

@@ -1,12 +1,29 @@
 import React, { useState, useEffect } from "react";
 import uniqid from "uniqid";
 import axios from "axios";
-import { Container, Grid, Header, Card, Icon, Button } from "semantic-ui-react";
+import {
+  Container,
+  Grid,
+  Header,
+  Card,
+  Icon,
+  Button,
+  Image,
+  Modal,
+  Dropdown,
+} from "semantic-ui-react";
 import Link from "./Link";
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
-
+  const [open, setOpen] = React.useState(false);
+  const [options, setOptions] = useState([
+    { key: "af", value: "af", flag: "af", text: "Afghanistan" },
+    { key: "ax", value: "ax", flag: "ax", text: "Aland Islands" },
+    { key: "al", value: "al", flag: "al", text: "Albania" },
+    { key: "dz", value: "dz", flag: "dz", text: "Algeria" },
+    { key: "as", value: "as", flag: "as", text: "American Samoa" },
+  ]);
   useEffect(() => {
     (async () => {
       const response = await axios.get("http://localhost:5000/api/1/users", {});
@@ -62,10 +79,45 @@ const AdminPanel = () => {
                   </Card.Content>
                   <Card.Content extra>
                     <div className="ui two buttons">
-                      <Button basic color="green" onClick={modifyBtn}>
-                        Modyfikuj
-                      </Button>
-                      <Button basic color="red" onClick={deleteBtn}>
+                      <Modal
+                        onClose={() => setOpen(false)}
+                        onOpen={() => setOpen(true)}
+                        open={open}
+                        trigger={<Button color="green">Modyfikuj</Button>}
+                      >
+                        <Modal.Header>Select a Photo</Modal.Header>
+                        <Modal.Content image>
+                          <Image
+                            size="medium"
+                            src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
+                            wrapped
+                          />
+                          <Modal.Description>
+                            <Header>Wybierz dzielnicę</Header>
+                            <Dropdown
+                              placeholder="Select Country"
+                              fluid
+                              search
+                              selection
+                              options={options}
+                            />
+                          </Modal.Description>
+                        </Modal.Content>
+                        <Modal.Actions>
+                          <Button color="black" onClick={() => setOpen(false)}>
+                            Nope
+                          </Button>
+                          <Button
+                            content="Yep, that's me"
+                            labelPosition="right"
+                            icon="checkmark"
+                            onClick={() => setOpen(false)}
+                            positive
+                          />
+                        </Modal.Actions>
+                      </Modal>
+
+                      <Button color="red" onClick={deleteBtn}>
                         Usuń
                       </Button>
                     </div>
