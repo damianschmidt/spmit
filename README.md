@@ -47,35 +47,9 @@ bądź dla systemu Windows:
 **UWAGA!**  
 W przypadku błędu `standard_init_linux.go:211: exec user process caused „no such file or directory“` trzeba zmienić kodowanie końca linii! Info jak to zrobić u Kamila 😊
 
-Po zbudowaniu kontenera dostępne powinno być API. Można to sprawdzić wchodząć w przeglądarce pod adres `localhost:5000/api/1`.
-
-Przykładowe zapytanie za pomocą cURL, które można wysłać na backend pytając o optymalną drogę:
-```bash
-curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"lockers_list": ["WRO88M","WRO911","WRO33A"], "courier_latitude": 51.09907, "courier_longitude": 17.027580}' "http://localhost:5000/api/1/lockers/route"
-```
-
-Jeśli chcemy otrzymać wskazówki:
-```bash
-curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"path": ["courier", "WRO88M","WRO911","WRO33A", "courier"], "courier_latitude": 51.09907, "courier_longitude": 17.027580}' "http://localhost:5000/api/1/here_api/directions"
-```
-
-Dodawanie kuriera:
-```bash
-curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d '{"username": "test_courier", "password": "test_courier_password", "role": "courier", "district": "srodmiescie"}' "http://localhost:5000/api/1/users"
-```
-
-Usuwanie kuriera:
-```bash
-curl -X DELETE -H "Content-type: application/json" -H "Accept: application/json" -d '{"username": "kamildudek"}' "http://localhost:5000/api/1/users"
-```
-
-Aktualizacja kuriera:
-```bash
-curl -X PUT -H "Content-type: application/json" -H "Accept: application/json" -d '{"username": "kamildudek", "update_dict": {"district": "new_district"}}' "http://localhost:5000/api/1/users"
-```
-
 Dodano do skryptu również frontend. Ponieważ kontener buduje sobie aplikacje na podstawie folderu node_modules trzeba uprzednio wejść lokalnie w `/spmit/frontend`, a następnie wpisać komendę:
 ```bash
 npm install
 ```
+
 Komende należy puścić lokalnie, kiedy ktoś dodał jakąś paczkę do node_modules, nie trzeba tego robić za każdym razem! Po zbudowaniu kontenerów, frontend jest dostępny pod `localhost:3000`.
