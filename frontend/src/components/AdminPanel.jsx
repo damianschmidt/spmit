@@ -39,9 +39,12 @@ const AdminPanel = () => {
     })();
   }, []);
 
-  const deleteBtn = () => {
+  const deleteBtn = async () => {
     console.log("usuwam");
     window.location.reload(false);
+    const response = await axios.get("http://localhost:5000/api/1/users", {
+      username: "kamildudek",
+    });
   };
 
   const modifyBtn = () => {
