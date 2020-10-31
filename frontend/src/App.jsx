@@ -12,6 +12,7 @@ const App = () => {
   const [latitude, setLatitude] = useState(null);
   const [longtitude, setLongtitude] = useState(null);
   const [lockersResultList, setLockersResultList] = useState({});
+  const [lockersDetails, setLockersDetails] = useState([]);
 
   return (
     <>
@@ -19,11 +20,13 @@ const App = () => {
       <Route path="/">
         <Container>
           <RoadDetailForm
+            setLockersDetails={setLockersDetails}
             setLockersResultList={setLockersResultList}
             setLatitude={setLatitude}
             setLongtitude={setLongtitude}
           />
           <RoadInfo
+            lockersDetails={lockersDetails}
             lockersResultList={lockersResultList}
             latitude={latitude}
             longtitude={longtitude}

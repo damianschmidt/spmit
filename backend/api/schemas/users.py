@@ -18,9 +18,17 @@ class DeleteUserSchema(Schema):
         unknown = EXCLUDE
 
 
+class UpdateFieldsSchema(Schema):
+    role = fields.String(required=False)
+    district = fields.String(required=False)
+
+    class Meta:
+        unknown = EXCLUDE
+
+
 class UpdateUserSchema(Schema):
     username = fields.String(required=True)
-    update_dict = fields.Nested(AddUserSchema, required=True)
+    update_dict = fields.Nested(UpdateFieldsSchema, required=True)
 
     class Meta:
         unknown = EXCLUDE

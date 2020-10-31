@@ -5,6 +5,7 @@ import LockerList from "./LockerList";
 import axios from "axios";
 
 const RoadDetailsForm = ({
+  setLockersDetails,
   setLockersResultList,
   setLatitude,
   setLongtitude,
@@ -14,6 +15,7 @@ const RoadDetailsForm = ({
   const [lockerErrorState, setLockerErrorState] = useState(false);
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
+  const [coordsIsValid, setCoordsIsValid] = useState(true);
 
   const handleClick = (e) => {
     setActiveIndex(!activeIndex);
@@ -37,11 +39,16 @@ const RoadDetailsForm = ({
         }
       );
 
-      setLockersResultList(response.data);
-      setLatitude(lat);
-      setLongtitude(lng);
-
-      setActiveIndex(!activeIndex);
+      // validate latitude, longitude
+      if (Number(lat) === Number(lat) && Number(lng) === Number(lng)) {
+        setLockersResultList(response.data);
+        setLatitude(lat);
+        setLongtitude(lng);
+        setActiveIndex(!activeIndex);
+        setCoordsIsValid(true);
+      } else {
+        setCoordsIsValid(false);
+      }
     }
   };
 
@@ -55,12 +62,17 @@ const RoadDetailsForm = ({
         <Accordion.Content active={activeIndex}>
           <Form error={lockerErrorState} inverted onSubmit={onButtonSubmit}>
             <Localization
+              coordsIsValid={coordsIsValid}
               latitude={lat}
               setLatitude={setLat}
               longtitude={lng}
               setLongtitude={setLng}
             />
-            <LockerList lockers={lockers} setLockers={setLockers} />
+            <LockerList
+              lockers={lockers}
+              setLockers={setLockers}
+              setLockersDetails={setLockersDetails}
+            />
             <Message
               error
               header="Nie wybrano żadnego paczkomatu"

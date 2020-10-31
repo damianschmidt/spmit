@@ -1,16 +1,19 @@
+# basic API call
 ###
-GET http://localhost:5000/api/1/lockers
+GET http://localhost:5000/api/1
 
-### 
-POST http://localhost:5000/api/1/lockers/route
-Content-Type: application/json
 
-{
-  "lockers_list": ["WRO88M","WRO911","WRO33A"], 
-  "courier_latitude": 51.0, 
-  "courier_longitude": 17.0
-}
+# get place information
+###
+GET http://localhost:5000/api/1/here_api/51.0/17.0
 
+
+# get route information
+###
+GET http://localhost:5000/api/1/here_api/51.0/17.0/51.02/17.02
+
+
+# get directions
 ###
 POST http://localhost:5000/api/1/here_api/directions
 Content-Type: application/json
@@ -21,32 +24,79 @@ Content-Type: application/json
    "courier_longitude": 17.027580
 }
 
+
+# get lockers
 ###
-GET http://localhost:5000/api/1/users
+GET http://localhost:5000/api/1/lockers
+
+
+# get lockers from district
 ###
-PUT http://localhost:5000/api/1/users
+GET http://localhost:5000/api/1/lockers/srodmiescie
+
+
+# get districts
+###
+GET http://localhost:5000/api/1/lockers/districts
+
+
+# get optimal route
+###
+POST http://localhost:5000/api/1/lockers/route
 Content-Type: application/json
- 
- {
-   "username": "kamildudek", 
-   "update_dict": [{"district": "srodmiescie"}], 
+
+{
+  "lockers_list": ["WRO88M","WRO911","WRO33A"], 
+  "courier_latitude": 51.09907, 
+  "courier_longitude": 17.027580
 }
 
+
+# get users
+###
+GET http://localhost:5000/api/1/users
+
+
+# add user
 ###
 POST http://localhost:5000/api/1/users
 Content-Type: application/json
 
- {
-   "username": "kamildudek4", 
-   "password": "asdasdasd", 
-   "role": "admin",
-   "district": "gaj"
+{
+  "username": "test_user", 
+  "password": "test_user_password", 
+  "role": "courier",
+  "district": "gaj",
 }
 
+
+# update user
 ###
-DELETE  http://localhost:5000/api/1/users
+PUT http://localhost:5000/api/1/users
 Content-Type: application/json
- 
- {
-   "username": "kamildudek4", 
+
+{
+  "username": "kamildudek", 
+  "update_dict": {"district": "new_district"},
+}
+
+
+# delete user
+###
+DELETE http://localhost:5000/api/1/users
+Content-Type: application/json
+
+{
+  "username": "kamildudek", 
+}
+
+
+# login user
+###
+POST http://localhost:5000/api/1/users
+Content-Type: application/json
+
+{
+  "username": "kamildudek",
+  "password": "kamildudek_password", 
 }

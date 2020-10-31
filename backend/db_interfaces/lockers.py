@@ -12,7 +12,13 @@ class LockersDbTools:
         return list(lockers)
 
     def add_locker(self, locker_dict):
-        self._collection.insert_one(locker_dict)
+        locker_dict_copy = locker_dict.copy()
+        self._collection.insert_one(locker_dict_copy)
+
+        return locker_dict
 
     def add_many_lockers(self, locker_dicts_list):
-        self._collection.insert(locker_dicts_list)
+        locker_dicts_list_copy = locker_dicts_list.copy()
+        self._collection.insert(locker_dicts_list_copy)
+
+        return locker_dicts_list
