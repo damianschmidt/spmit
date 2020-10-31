@@ -18,7 +18,7 @@ const AdminPanel = () => {
   const [district, setDistrict] = useState("");
   const [addSuccessfully, setAddSuccessfully] = useState(false);
   const [dataErrorState, setDataErrorState] = useState(false);
-
+  console.log(addSuccessfully);
   const onButtonSubmit = async () => {
     const response = await axios.post("http://localhost:5000/api/1/users", {
       username,
@@ -64,9 +64,10 @@ const AdminPanel = () => {
           </Header>
 
           <Form
+            inverted
             size="large"
+            success={addSuccessfully}
             error={dataErrorState}
-            positive={addSuccessfully}
             inverted
             onSubmit={onButtonSubmit}
           >
@@ -108,7 +109,7 @@ const AdminPanel = () => {
                 index={3}
                 onChange={onInputChange}
               />
-              <Message positive>
+              <Message success>
                 <Icon name="check" size="small" />
                 Użytkownik został dodany!
               </Message>
