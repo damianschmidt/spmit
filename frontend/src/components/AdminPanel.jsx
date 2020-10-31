@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import uniqid from "uniqid";
 import axios from "axios";
-import { Grid, Header, Card } from "semantic-ui-react";
+import { Container, Grid, Header, Card, Icon, Button } from "semantic-ui-react";
+import Link from "./Link";
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
-  const [hasError, setErrors] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -24,18 +24,40 @@ const AdminPanel = () => {
 
   return (
     <>
-      <Header size="small" inverted className="form-header">
-        Lista kurierów
-      </Header>
+      <Grid columns={2}>
+        <Grid.Column>
+          <Header size="small" inverted className="form-header">
+            Lista kurierów
+          </Header>
+        </Grid.Column>
+        <Grid.Column>
+          <Container textAlign="right">
+            <Button icon labelPosition="right">
+              <Icon name="arrow right" />
+              <Link href="/modify">Dodaj użytkownika</Link>
+            </Button>
+          </Container>
+        </Grid.Column>
+      </Grid>
+
       <Grid stackable>
         <Grid.Row columns={3}>
           {users.map((user) => (
-            <Grid.Column floated stretched key={user.key}>
-              <Card>
-                <Card.Content header={user.value} />
-                <Card.Content description={"Stanowisko: " + user.role} />
-                <Card.Content description={"Dzielnica: " + user.district} />
-              </Card>
+            <Grid.Column
+              style={{ margin: "0.5em 0" }}
+              floated
+              stretched
+              key={user.key}
+            >
+              <Card.Group>
+                <Card>
+                  <Card.Content>
+                    <Card.Header content={user.value} />
+                    <Card.Meta content={"Stanowisko: " + user.role} />
+                    <Card.Description content={"Dzielnica: " + user.district} />
+                  </Card.Content>
+                </Card>
+              </Card.Group>
             </Grid.Column>
           ))}
         </Grid.Row>
