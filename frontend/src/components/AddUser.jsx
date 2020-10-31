@@ -14,7 +14,6 @@ import Link from "./Link";
 const AddUser = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
   const [district, setDistrict] = useState("");
   const [addSuccessfully, setAddSuccessfully] = useState(false);
   const [dataErrorState, setDataErrorState] = useState(false);
@@ -23,7 +22,7 @@ const AddUser = () => {
     const response = await axios.post("http://localhost:5000/api/1/users", {
       username,
       password,
-      role,
+      role: "courier",
       district,
     });
 
@@ -40,8 +39,6 @@ const AddUser = () => {
     } else if (index == 1) {
       setPassword(value);
     } else if (index == 2) {
-      setRole(value);
-    } else if (index == 3) {
       setDistrict(value);
     }
   };
@@ -94,19 +91,10 @@ const AddUser = () => {
               <Form.Input
                 fluid
                 required
-                icon="id badge"
-                iconPosition="left"
-                placeholder="Stanowisko"
-                index={2}
-                onChange={onInputChange}
-              />
-              <Form.Input
-                fluid
-                required
                 icon="map"
                 iconPosition="left"
                 placeholder="Dzielnica"
-                index={3}
+                index={2}
                 onChange={onInputChange}
               />
               <Message success>

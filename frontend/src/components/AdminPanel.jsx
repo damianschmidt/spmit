@@ -22,6 +22,15 @@ const AdminPanel = () => {
     })();
   }, []);
 
+  const deleteBtn = () => {
+    console.log("usuwam");
+    window.location.reload(false);
+  };
+
+  const modifyBtn = () => {
+    console.log("dodaje");
+  };
+
   return (
     <>
       <Grid columns={2}>
@@ -43,18 +52,23 @@ const AdminPanel = () => {
       <Grid stackable>
         <Grid.Row columns={3}>
           {users.map((user) => (
-            <Grid.Column
-              style={{ margin: "0.5em 0" }}
-              floated
-              stretched
-              key={user.key}
-            >
+            <Grid.Column style={{ margin: "0.5em 0" }} stretched key={user.key}>
               <Card.Group>
                 <Card>
                   <Card.Content>
                     <Card.Header content={user.value} />
                     <Card.Meta content={"Stanowisko: " + user.role} />
                     <Card.Description content={"Dzielnica: " + user.district} />
+                  </Card.Content>
+                  <Card.Content extra>
+                    <div className="ui two buttons">
+                      <Button basic color="green" onClick={modifyBtn}>
+                        Modyfikuj
+                      </Button>
+                      <Button basic color="red" onClick={deleteBtn}>
+                        Usuń
+                      </Button>
+                    </div>
                   </Card.Content>
                 </Card>
               </Card.Group>
