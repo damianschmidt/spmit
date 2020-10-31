@@ -11,7 +11,6 @@ UPDATE_USER_SCHEMA = UpdateUserSchema()
 DELETE_USER_SCHEMA = DeleteUserSchema()
 LOGIN_USER_SCHEMA = LoginUserSchema()
 
-
 @USERS.route('', methods=['GET'])
 def get_users():
     users_db = UsersDbTools()
