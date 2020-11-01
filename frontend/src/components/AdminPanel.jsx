@@ -11,7 +11,6 @@ import {
   Modal,
   Dropdown,
   Form,
-  Popup,
 } from "semantic-ui-react";
 import Link from "./Link";
 
@@ -61,8 +60,10 @@ const AdminPanel = () => {
       }
     });
     window.location.reload();
-    await axios.delete("http://localhost:5000/api/1/users", {
-      username,
+    await axios("http://localhost:5000/api/1/users", {
+      method: "DELETE",
+      data: JSON.stringify({ username }),
+      headers: { "Content-Type": "application/json" },
     });
   };
 
@@ -81,12 +82,12 @@ const AdminPanel = () => {
   return (
     <>
       <Grid columns={2} stretched>
-        <Grid.Column floated>
+        <Grid.Column>
           <Header size="small" inverted className="form-header">
             Lista kurierów
           </Header>
         </Grid.Column>
-        <Grid.Column floated>
+        <Grid.Column>
           <Container textAlign="right">
             <Button size={"tiny"} icon labelPosition="right">
               <Icon name="add" />
@@ -159,9 +160,7 @@ const AdminPanel = () => {
                         onClose={() => setOpenDelModal(false)}
                         onOpen={() => setOpenDelModal(true)}
                       >
-                        <Header icon="user">
-                          Usuń użytkownika: {username}
-                        </Header>
+                        <Header>Usuń użytkownika: {username}</Header>
                         <Modal.Content>
                           <p>Czy jesteś pewien?</p>
                         </Modal.Content>
