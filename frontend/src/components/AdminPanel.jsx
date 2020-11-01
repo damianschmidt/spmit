@@ -10,6 +10,7 @@ import {
   Button,
   Modal,
   Dropdown,
+  Form,
 } from "semantic-ui-react";
 import Link from "./Link";
 
@@ -60,13 +61,28 @@ const AdminPanel = () => {
 
     // window.location.reload(false);
     const response = await axios.delete("http://localhost:5000/api/1/users", {
-      username: username,
+      username: "kamildudek",
     });
     console.log(response.data);
   };
 
-  const modifyBtn = () => {
-    console.log("dodaje");
+  const modifyBtn = async () => {
+    const response = await axios.put("http://localhost:5000/api/1/users", {
+      username: "kamildudek",
+      update_dict: { district: "new_district" },
+    });
+    console.log(response);
+  };
+
+  const handleSubmit = (e, p) => {
+    // users.forEach((e) => {
+    //   if (e.key === p.children.key) {
+    //     setUsername(e.value);
+    //   }
+    // });
+    setUsername([...users].filter((e) => e.key === p.children.key)[0].value);
+    console.log(username);
+    console.log(p.children.key);
   };
 
   return (
@@ -90,57 +106,66 @@ const AdminPanel = () => {
       <Grid stackable>
         <Grid.Row columns={3}>
           {users.map((user) => (
-            <Grid.Column style={{ margin: "0.5em 0" }} stretched key={user.key}>
-              <Card>
-                <h1>{user.key}</h1>
-                <Card.Content>
-                  <Card.Header content={user.value} />
-                  <Card.Meta content={"Stanowisko: " + user.role} />
-                  <Card.Description content={"Dzielnica: " + user.district} />
-                </Card.Content>
-                <Card.Content extra>
-                  <div className="ui two buttons">
-                    <Modal
-                      onClose={() => setOpen(false)}
-                      onOpen={() => setOpen(true)}
-                      open={open}
-                      trigger={
-                        <Button key={user.key} color="green">
-                          Modyfikuj
-                        </Button>
-                      }
-                    >
-                      <Modal.Header>Wybierz dzielnicę</Modal.Header>
+            <Form
+              onSubmit={handleSubmit}
+              style={{ margin: "0.25em 0.5em 0.25em 0.5em" }}
+            >
+              <Grid.Column
+                style={{ margin: "0.5em 0" }}
+                stretched
+                key={user.key}
+              >
+                <Card>
+                  <h1>{user.key}</h1>
+                  <Card.Content>
+                    <Card.Header content={user.value} />
+                    <Card.Meta content={"Stanowisko: " + user.role} />
+                    <Card.Description content={"Dzielnica: " + user.district} />
+                  </Card.Content>
+                  <Card.Content extra>
+                    <div className="ui two buttons">
+                      <Modal
+                        onClose={() => setOpen(false)}
+                        onOpen={() => setOpen(true)}
+                        open={open}
+                        trigger={
+                          <Button key={user.key} color="green">
+                            Modyfikuj
+                          </Button>
+                        }
+                      >
+                        <Modal.Header>Wybierz dzielnicę</Modal.Header>
 
-                      <Modal.Description>
-                        <Dropdown
-                          placeholder="Dzielnica"
-                          name="disctrict"
-                          selection
-                          fluid
-                          onChange={onChange}
-                          options={districtTable}
-                          value={values.disctrict}
-                        />
-                      </Modal.Description>
-                      <Modal.Actions>
-                        <Button
-                          content="Zapisz"
-                          labelPosition="right"
-                          icon="checkmark"
-                          onClick={() => setOpen(false)}
-                          positive
-                        />
-                      </Modal.Actions>
-                    </Modal>
+                        <Modal.Description>
+                          <Dropdown
+                            placeholder="Dzielnica"
+                            name="disctrict"
+                            selection
+                            fluid
+                            onChange={onChange}
+                            options={districtTable}
+                            value={values.disctrict}
+                          />
+                        </Modal.Description>
+                        <Modal.Actions>
+                          <Button
+                            content="Zapisz"
+                            labelPosition="right"
+                            icon="checkmark"
+                            onClick={(() => setOpen(false), modifyBtn)}
+                            positive
+                          />
+                        </Modal.Actions>
+                      </Modal>
 
-                    <Button color="red" onClick={deleteBtn}>
-                      Usuń
-                    </Button>
-                  </div>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
+                      <Button color="red" onClick={deleteBtn}>
+                        Usuń
+                      </Button>
+                    </div>
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+            </Form>
           ))}
         </Grid.Row>
       </Grid>
