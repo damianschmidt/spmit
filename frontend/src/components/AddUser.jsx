@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import uniqid from "uniqid";
 import {
   Grid,
   Header,
@@ -8,8 +9,6 @@ import {
   Button,
   Icon,
   Message,
-  Dropdown,
-  Input,
 } from "semantic-ui-react";
 import Link from "./Link";
 
@@ -20,19 +19,40 @@ const AddUser = () => {
   const [addSuccessfully, setAddSuccessfully] = useState(false);
   const [dataErrorState, setDataErrorState] = useState(false);
   const [users, setUsers] = useState([]);
+  const [districtTable, setDistrictTable] = useState([]);
   const [usernameIsTaken, setusernameIsTaken] = useState(false);
+  const [values] = useState({});
+
+  const onChange = (event, result) => {
+    const { value } = result || event.target;
+    setDistrict(value);
+  };
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get("http://localhost:5000/api/1/users", {});
-
+      const response_users = await axios.get(
+        "http://localhost:5000/api/1/users",
+        {}
+      );
       setUsers(
-        [...response.data].map((e) => ({
+        [...response_users.data].map((e) => ({
           username: e.username,
+        }))
+      );
+      const response_district = await axios.get(
+        "http://localhost:5000/api/1/lockers/districts",
+        {}
+      );
+      setDistrictTable(
+        [...response_district.data].map((e) => ({
+          key: uniqid(),
+          text: e,
+          value: e,
         }))
       );
     })();
   }, []);
+
   const onButtonSubmit = async () => {
     const response = await axios.post("http://localhost:5000/api/1/users", {
       username,
@@ -53,17 +73,15 @@ const AddUser = () => {
       setUsername(value);
       setusernameIsTaken(false);
       users.forEach((e) => {
-        if (e.username == value) {
+        if (e.username === value) {
           setDataErrorState(true);
           setusernameIsTaken(true);
         } else if (usernameIsTaken) {
           setDataErrorState(false);
         }
       });
-    } else if (index == 1) {
+    } else if (index === 1) {
       setPassword(value);
-    } else if (index == 2) {
-      setDistrict(value);
     }
   };
 
@@ -89,7 +107,6 @@ const AddUser = () => {
             size="large"
             success={addSuccessfully}
             error={dataErrorState}
-            inverted
             onSubmit={onButtonSubmit}
           >
             <Segment stacked inverted>
@@ -113,22 +130,14 @@ const AddUser = () => {
                 index={1}
                 onChange={onInputChange}
               />
-              <Form.Input
-                fluid
-                required
-                icon="map"
-                iconPosition="left"
+              <Form.Dropdown
                 placeholder="Dzielnica"
-                index={2}
-                onChange={onInputChange}
-              />
-              {/* <Dropdown
-                placeholder="Select Country"
-                fluid
-                search
+                name="disctrict"
                 selection
-                options={options}
-              /> */}
+                onChange={onChange}
+                options={districtTable}
+                value={values.disctrict}
+              />
               <Message success>
                 <Icon name="check" size="small" />
                 Użytkownik został dodany!
