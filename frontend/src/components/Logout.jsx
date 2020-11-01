@@ -4,6 +4,9 @@ import { Grid, Header } from "semantic-ui-react";
 const Logout = () => {
   useEffect(() => {
     localStorage.setItem("isLogged", "");
+    localStorage.removeItem("name");
+    localStorage.removeItem("role");
+    localStorage.removeItem("district");
     window.location.pathname = "/";
   }, []);
 
