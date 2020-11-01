@@ -20,6 +20,7 @@ const AddUser = () => {
   const [addSuccessfully, setAddSuccessfully] = useState(false);
   const [dataErrorState, setDataErrorState] = useState(false);
   const [users, setUsers] = useState([]);
+  const [usernameIsTaken, setusernameIsTaken] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -27,12 +28,11 @@ const AddUser = () => {
 
       setUsers(
         [...response.data].map((e) => ({
-          value: e.username,
+          username: e.username,
         }))
       );
     })();
   }, []);
-
   const onButtonSubmit = async () => {
     const response = await axios.post("http://localhost:5000/api/1/users", {
       username,
@@ -49,8 +49,17 @@ const AddUser = () => {
   };
 
   const onInputChange = (e, { value, index }) => {
-    if (index === 0 && users.includes(value) == false) {
+    if (index === 0) {
       setUsername(value);
+      setusernameIsTaken(false);
+      users.forEach((e) => {
+        if (e.username == value) {
+          setDataErrorState(true);
+          setusernameIsTaken(true);
+        } else if (usernameIsTaken) {
+          setDataErrorState(false);
+        }
+      });
     } else if (index == 1) {
       setPassword(value);
     } else if (index == 2) {
@@ -126,9 +135,14 @@ const AddUser = () => {
               </Message>
               <Message error>
                 <Icon name="times" size="small" />
-                Coś poszło nie tak!
+                Nazwa użytkownika już jest zajęta!
               </Message>
-              <Button color="orange" fluid size="large">
+              <Button
+                disabled={dataErrorState}
+                color="orange"
+                fluid
+                size="large"
+              >
                 Dodaj użytkownika
               </Button>
             </Segment>
