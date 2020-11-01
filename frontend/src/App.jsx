@@ -7,8 +7,11 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import RoadInfo from "./components/RoadInfo";
 import LoginForm from "./components/LoginPanel";
+import AdminPanel from "./components/AdminPanel";
+import AddUser from "./components/AddUser";
 import Logout from "./components/Logout";
 import User from "./components/User";
+
 
 const App = () => {
   const [latitude, setLatitude] = useState(null);
@@ -32,6 +35,7 @@ const App = () => {
 
   return (
     <>
+
       <BrowserRouter>
         <HeaderBar />
         <Switch>
