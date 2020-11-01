@@ -18,7 +18,7 @@ const AddUser = () => {
   const [district, setDistrict] = useState("");
   const [addSuccessfully, setAddSuccessfully] = useState(false);
   const [dataErrorState, setDataErrorState] = useState(false);
-  const [unfilledData, setunfilledData] = useState(true);
+  const [unfilledData, setUnfilledData] = useState(true);
   const [users, setUsers] = useState([]);
   const [districtTable, setDistrictTable] = useState([]);
   const [usernameIsTaken, setusernameIsTaken] = useState(false);
@@ -27,7 +27,7 @@ const AddUser = () => {
   const onChange = (event, result) => {
     const { value } = result || event.target;
     setDistrict(value);
-    setunfilledData(false);
+    setUnfilledData(false);
   };
 
   useEffect(() => {
