@@ -18,7 +18,7 @@ const Map = ({ waypoints, latitude, longtitude, lockersDetails }) => {
 
     const hMap = new H.Map(mapRef.current, defaultLayers.vector.normal.map, {
       center: { lat: latitude || 51.108, lng: longtitude || 17.04 },
-      zoom: 13,
+      zoom: 10,
       pixelRatio: window.devicePixelRatio || 1,
     });
 

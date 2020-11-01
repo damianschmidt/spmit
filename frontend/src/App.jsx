@@ -8,6 +8,7 @@ import PublicRoute from "./components/PublicRoute";
 import RoadInfo from "./components/RoadInfo";
 import LoginForm from "./components/LoginPanel";
 import Logout from "./components/Logout";
+import User from "./components/User";
 
 const App = () => {
   const [latitude, setLatitude] = useState(null);
@@ -64,6 +65,11 @@ const App = () => {
           <ProtectedRoute exact path="/logout">
             <Container>
               <Logout />
+            </Container>
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/user">
+            <Container>
+              <User />
             </Container>
           </ProtectedRoute>
           <Route render={() => <Redirect to="/" />} />

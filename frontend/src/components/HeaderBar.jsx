@@ -13,7 +13,10 @@ const HeaderBar = () => {
         </Link>
         <Link href="/">Home</Link>
         {!!localStorage.getItem("isLogged") ? (
-          <Link href="/logout">Logout</Link>
+          <>
+            <Link href="/user">Użytkownik</Link>
+            <Link href="/logout">Logout</Link>
+          </>
         ) : (
           <Link href="/login">Login</Link>
         )}

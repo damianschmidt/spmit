@@ -10,7 +10,9 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   useEffect(() => {
     (async () => {
       const response = await axios.get(
-        "http://localhost:5000/api/1/lockers",
+        `http://localhost:5000/api/1/lockers/${localStorage.getItem(
+          "district"
+        )}`,
         {}
       );
 
