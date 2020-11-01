@@ -16,14 +16,9 @@ import Link from "./Link";
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
-  const [open, setOpen] = React.useState(false);
-  const [options, setOptions] = useState([
-    { key: "af", value: "af", flag: "af", text: "Afghanistan" },
-    { key: "ax", value: "ax", flag: "ax", text: "Aland Islands" },
-    { key: "al", value: "al", flag: "al", text: "Albania" },
-    { key: "dz", value: "dz", flag: "dz", text: "Algeria" },
-    { key: "as", value: "as", flag: "as", text: "American Samoa" },
-  ]);
+  const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState("");
+
   useEffect(() => {
     (async () => {
       const response = await axios.get("http://localhost:5000/api/1/users", {});
@@ -39,12 +34,18 @@ const AdminPanel = () => {
     })();
   }, []);
 
-  const deleteBtn = async () => {
-    console.log("usuwam");
-    window.location.reload(false);
-    const response = await axios.get("http://localhost:5000/api/1/users", {
-      username: "kamildudek",
+  const deleteBtn = async (key) => {
+    users.forEach((e) => {
+      if (e.key == key) {
+        setUsername(e.value);
+      }
     });
+
+    // window.location.reload(false);
+    const response = await axios.delete("http://localhost:5000/api/1/users", {
+      username: username,
+    });
+    console.log(response.data);
   };
 
   const modifyBtn = () => {
@@ -73,60 +74,53 @@ const AdminPanel = () => {
         <Grid.Row columns={3}>
           {users.map((user) => (
             <Grid.Column style={{ margin: "0.5em 0" }} stretched key={user.key}>
-              <Card.Group>
-                <Card>
-                  <Card.Content>
-                    <Card.Header content={user.value} />
-                    <Card.Meta content={"Stanowisko: " + user.role} />
-                    <Card.Description content={"Dzielnica: " + user.district} />
-                  </Card.Content>
-                  <Card.Content extra>
-                    <div className="ui two buttons">
-                      <Modal
-                        onClose={() => setOpen(false)}
-                        onOpen={() => setOpen(true)}
-                        open={open}
-                        trigger={<Button color="green">Modyfikuj</Button>}
-                      >
-                        <Modal.Header>Select a Photo</Modal.Header>
-                        <Modal.Content image>
-                          <Image
-                            size="medium"
-                            src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
-                            wrapped
-                          />
-                          <Modal.Description>
-                            <Header>Wybierz dzielnicę</Header>
-                            <Dropdown
-                              placeholder="Select Country"
-                              fluid
-                              search
-                              selection
-                              options={options}
-                            />
-                          </Modal.Description>
-                        </Modal.Content>
-                        <Modal.Actions>
-                          <Button color="black" onClick={() => setOpen(false)}>
-                            Nope
-                          </Button>
-                          <Button
-                            content="Yep, that's me"
-                            labelPosition="right"
-                            icon="checkmark"
-                            onClick={() => setOpen(false)}
-                            positive
-                          />
-                        </Modal.Actions>
-                      </Modal>
+              <Card>
+                <h1>{user.key}</h1>
+                <Card.Content>
+                  <Card.Header content={user.value} />
+                  <Card.Meta content={"Stanowisko: " + user.role} />
+                  <Card.Description content={"Dzielnica: " + user.district} />
+                </Card.Content>
+                <Card.Content extra>
+                  <div className="ui two buttons">
+                    <Modal
+                      onClose={() => setOpen(false)}
+                      onOpen={() => setOpen(true)}
+                      open={open}
+                      trigger={
+                        <Button key={user.key} color="green">
+                          Modyfikuj
+                        </Button>
+                      }
+                    >
+                      <Modal.Header>Wybierz dzielnicę</Modal.Header>
 
-                      <Button color="red" onClick={deleteBtn}>
-                        Usuń
-                      </Button>
-                    </div>
-                  </Card.Content>
-                </Card>
-              </Card.Group>
+                      <Modal.Description>
+                        <Dropdown
+                          placeholder="Wybierz dzielnicę"
+                          fluid
+                          search
+                          selection
+                          options={users}
+                        />
+                      </Modal.Description>
+                      <Modal.Actions>
+                        <Button
+                          content="Zapisz"
+                          labelPosition="right"
+                          icon="checkmark"
+                          onClick={() => setOpen(false)}
+                          positive
+                        />
+                      </Modal.Actions>
+                    </Modal>
+
+                    <Button color="red" onClick={deleteBtn}>
+                      Usuń
+                    </Button>
+                  </div>
+                </Card.Content>
+              </Card>
             </Grid.Column>
           ))}
         </Grid.Row>

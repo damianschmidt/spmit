@@ -20,13 +20,6 @@ const AddUser = () => {
   const [addSuccessfully, setAddSuccessfully] = useState(false);
   const [dataErrorState, setDataErrorState] = useState(false);
   const [users, setUsers] = useState([]);
-  const [options, setOptions] = useState([
-    { key: "af", value: "af", flag: "af", text: "Afghanistan" },
-    { key: "ax", value: "ax", flag: "ax", text: "Aland Islands" },
-    { key: "al", value: "al", flag: "al", text: "Albania" },
-    { key: "dz", value: "dz", flag: "dz", text: "Algeria" },
-    { key: "as", value: "as", flag: "as", text: "American Samoa" },
-  ]);
 
   useEffect(() => {
     (async () => {
@@ -38,7 +31,6 @@ const AddUser = () => {
         }))
       );
     })();
-    console.log(setUsers);
   }, []);
 
   const onButtonSubmit = async () => {
