@@ -3,9 +3,7 @@ import { Grid, Header } from "semantic-ui-react";
 
 const Logout = () => {
   useEffect(() => {
-    console.log("test_________");
     localStorage.setItem("isLogged", "");
-    console.log("test: ", !!localStorage.getItem("isLogged"));
     window.location.pathname = "/";
   }, []);
 
