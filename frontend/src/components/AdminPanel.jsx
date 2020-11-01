@@ -8,7 +8,6 @@ import {
   Card,
   Icon,
   Button,
-  Image,
   Modal,
   Dropdown,
 } from "semantic-ui-react";
@@ -18,6 +17,9 @@ const AdminPanel = () => {
   const [users, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
   const [username, setUsername] = useState("");
+  const [values] = useState({});
+  const [district, setDistrict] = useState("");
+  const [districtTable, setDistrictTable] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -31,12 +33,27 @@ const AdminPanel = () => {
           district: e.district,
         }))
       );
+      const response_district = await axios.get(
+        "http://localhost:5000/api/1/lockers/districts",
+        {}
+      );
+      setDistrictTable(
+        [...response_district.data].map((e) => ({
+          key: uniqid(),
+          text: e,
+          value: e,
+        }))
+      );
     })();
   }, []);
 
+  const onChange = (event, result) => {
+    const { value } = result || event.target;
+    setDistrict(value);
+  };
   const deleteBtn = async (key) => {
     users.forEach((e) => {
-      if (e.key == key) {
+      if (e.key === key) {
         setUsername(e.value);
       }
     });
@@ -97,11 +114,13 @@ const AdminPanel = () => {
 
                       <Modal.Description>
                         <Dropdown
-                          placeholder="Wybierz dzielnicę"
-                          fluid
-                          search
+                          placeholder="Dzielnica"
+                          name="disctrict"
                           selection
-                          options={users}
+                          fluid
+                          onChange={onChange}
+                          options={districtTable}
+                          value={values.disctrict}
                         />
                       </Modal.Description>
                       <Modal.Actions>
