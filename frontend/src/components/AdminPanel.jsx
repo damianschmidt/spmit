@@ -11,12 +11,14 @@ import {
   Modal,
   Dropdown,
   Form,
+  Popup,
 } from "semantic-ui-react";
 import Link from "./Link";
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openDelModal, setOpenDelModal] = useState(false);
   const [username, setUsername] = useState("");
   const [values] = useState({});
   const [district, setDistrict] = useState("");
@@ -58,45 +60,36 @@ const AdminPanel = () => {
         setUsername(e.value);
       }
     });
-
-    // window.location.reload(false);
-    const response = await axios.delete("http://localhost:5000/api/1/users", {
-      username: "kamildudek",
+    window.location.reload();
+    await axios.delete("http://localhost:5000/api/1/users", {
+      username,
     });
-    console.log(response.data);
   };
 
   const modifyBtn = async () => {
-    const response = await axios.put("http://localhost:5000/api/1/users", {
-      username: "kamildudek",
-      update_dict: { district: "new_district" },
+    window.location.reload();
+    await axios.put("http://localhost:5000/api/1/users", {
+      username,
+      update_dict: { district },
     });
-    console.log(response);
   };
 
   const handleSubmit = (e, p) => {
-    // users.forEach((e) => {
-    //   if (e.key === p.children.key) {
-    //     setUsername(e.value);
-    //   }
-    // });
     setUsername([...users].filter((e) => e.key === p.children.key)[0].value);
-    console.log(username);
-    console.log(p.children.key);
   };
 
   return (
     <>
-      <Grid columns={2}>
-        <Grid.Column>
+      <Grid columns={2} stretched>
+        <Grid.Column floated>
           <Header size="small" inverted className="form-header">
             Lista kurierów
           </Header>
         </Grid.Column>
-        <Grid.Column>
+        <Grid.Column floated>
           <Container textAlign="right">
-            <Button icon labelPosition="right">
-              <Icon name="arrow right" />
+            <Button size={"tiny"} icon labelPosition="right">
+              <Icon name="add" />
               <Link href="/add-user">Dodaj użytkownika</Link>
             </Button>
           </Container>
@@ -106,33 +99,35 @@ const AdminPanel = () => {
       <Grid stackable>
         <Grid.Row columns={3}>
           {users.map((user) => (
-            <Form
-              onSubmit={handleSubmit}
-              style={{ margin: "0.25em 0.5em 0.25em 0.5em" }}
-            >
+            <Form onSubmit={handleSubmit} className="form-admin-panel">
               <Grid.Column
-                style={{ margin: "0.5em 0" }}
+                className={"form-admin-panel grid-column"}
                 stretched
                 key={user.key}
               >
-                <Card>
-                  <h1>{user.key}</h1>
+                <Card className="card-admin-panel">
                   <Card.Content>
-                    <Card.Header content={user.value} />
-                    <Card.Meta content={"Stanowisko: " + user.role} />
-                    <Card.Description content={"Dzielnica: " + user.district} />
+                    <Card.Header
+                      className="card-admin-panel header"
+                      content={user.value}
+                    />
+                    <Card.Meta
+                      className="card-admin-panel meta"
+                      content={"Stanowisko: " + user.role}
+                    />
+                    <Card.Description
+                      className="card-admin-panel description"
+                      content={"Dzielnica: " + user.district}
+                    />
                   </Card.Content>
                   <Card.Content extra>
                     <div className="ui two buttons">
                       <Modal
+                        closeIcon
                         onClose={() => setOpen(false)}
                         onOpen={() => setOpen(true)}
                         open={open}
-                        trigger={
-                          <Button key={user.key} color="green">
-                            Modyfikuj
-                          </Button>
-                        }
+                        trigger={<Button color="orange">Modyfikuj</Button>}
                       >
                         <Modal.Header>Wybierz dzielnicę</Modal.Header>
 
@@ -152,15 +147,39 @@ const AdminPanel = () => {
                             content="Zapisz"
                             labelPosition="right"
                             icon="checkmark"
-                            onClick={(() => setOpen(false), modifyBtn)}
+                            onClick={(() => setOpenDelModal(false), modifyBtn)}
                             positive
                           />
                         </Modal.Actions>
                       </Modal>
-
-                      <Button color="red" onClick={deleteBtn}>
-                        Usuń
-                      </Button>
+                      <Modal
+                        closeIcon
+                        open={openDelModal}
+                        trigger={<Button>Usuń</Button>}
+                        onClose={() => setOpenDelModal(false)}
+                        onOpen={() => setOpenDelModal(true)}
+                      >
+                        <Header icon="user">
+                          Usuń użytkownika: {username}
+                        </Header>
+                        <Modal.Content>
+                          <p>Czy jesteś pewien?</p>
+                        </Modal.Content>
+                        <Modal.Actions>
+                          <Button
+                            color="red"
+                            onClick={() => setOpenDelModal(false)}
+                          >
+                            <Icon name="remove" /> Nie
+                          </Button>
+                          <Button
+                            color="green"
+                            onClick={(() => setOpenDelModal(false), deleteBtn)}
+                          >
+                            <Icon name="checkmark" /> Tak
+                          </Button>
+                        </Modal.Actions>
+                      </Modal>
                     </div>
                   </Card.Content>
                 </Card>

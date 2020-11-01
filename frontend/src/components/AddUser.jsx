@@ -147,7 +147,7 @@ const AddUser = () => {
                 Nazwa użytkownika już jest zajęta!
               </Message>
               <Button
-                disabled={dataErrorState}
+                disabled={dataErrorState || addSuccessfully}
                 color="orange"
                 fluid
                 size="large"
