@@ -12,7 +12,6 @@ import AddUser from "./components/AddUser";
 import Logout from "./components/Logout";
 import User from "./components/User";
 
-
 const App = () => {
   const [latitude, setLatitude] = useState(null);
   const [longtitude, setLongtitude] = useState(null);
@@ -35,7 +34,6 @@ const App = () => {
 
   return (
     <>
-
       <BrowserRouter>
         <HeaderBar />
         <Switch>
@@ -54,6 +52,28 @@ const App = () => {
                   latitude={latitude}
                   longtitude={longtitude}
                 />
+              </Container>
+            ) : (
+              <Container>
+                <LoginForm />
+              </Container>
+            )}
+          </Route>
+          <Route exact path="/admin">
+            {isLogged ? (
+              <Container>
+                <AdminPanel />
+              </Container>
+            ) : (
+              <Container>
+                <LoginForm />
+              </Container>
+            )}
+          </Route>
+          <Route exact path="/add-user">
+            {isLogged ? (
+              <Container>
+                <AddUser />
               </Container>
             ) : (
               <Container>
