@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import * as mapFn from "./MapFunctions";
+import * as mapFn from "../utils/MapFunctions";
 
 const Map = ({ waypoints, latitude, longtitude, lockersDetails }) => {
   // Create a reference to the HTML element we want to put the map on

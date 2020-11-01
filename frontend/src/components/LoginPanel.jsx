@@ -25,6 +25,7 @@ const LoginForm = () => {
 
     if (response.data) {
       window.location.pathname = "/";
+      localStorage.setItem("isLogged", true);
     } else {
       setDataErrorState(true);
     }
