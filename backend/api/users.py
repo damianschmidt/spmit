@@ -11,6 +11,7 @@ UPDATE_USER_SCHEMA = UpdateUserSchema()
 DELETE_USER_SCHEMA = DeleteUserSchema()
 LOGIN_USER_SCHEMA = LoginUserSchema()
 
+
 @USERS.route('', methods=['GET'])
 def get_users():
     users_db = UsersDbTools()
@@ -22,6 +23,20 @@ def get_users():
         if user['username'] != 'admin':
             filtered_users.append(user)
     return jsonify(filtered_users), 200
+
+
+@USERS.route('/<username>', methods=['GET'])
+def get_user_info(username):
+    users_db = UsersDbTools()
+    users = users_db.get_users()
+
+    for user in users:
+        if username == user['username']:
+            del user['password']
+            return jsonify(user), 200
+
+    msg = f'User {username} not found in database'
+    return jsonify(msg), 404
 
 
 @USERS.route('', methods=['POST'])
