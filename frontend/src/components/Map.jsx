@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import * as mapFn from "./MapFunctions";
+import * as mapFn from "../utils/MapFunctions";
 
 const Map = ({ waypoints, latitude, longtitude, lockersDetails }) => {
   // Create a reference to the HTML element we want to put the map on
@@ -18,7 +18,7 @@ const Map = ({ waypoints, latitude, longtitude, lockersDetails }) => {
 
     const hMap = new H.Map(mapRef.current, defaultLayers.vector.normal.map, {
       center: { lat: latitude || 51.108, lng: longtitude || 17.04 },
-      zoom: 13,
+      zoom: 10,
       pixelRatio: window.devicePixelRatio || 1,
     });
 

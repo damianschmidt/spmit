@@ -12,7 +12,14 @@ const HeaderBar = () => {
           SPMiT
         </Link>
         <Link href="/">Home</Link>
-        <Link href="/login">Login</Link>
+        {!!localStorage.getItem("isLogged") ? (
+          <>
+            <Link href="/user">Użytkownik</Link>
+            <Link href="/logout">Logout</Link>
+          </>
+        ) : (
+          <Link href="/login">Login</Link>
+        )}
       </Container>
     </Menu>
   );
