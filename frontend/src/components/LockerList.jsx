@@ -31,7 +31,7 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   return (
     <>
       <Header size="small" inverted className="form-header">
-        Lista paczkomatów
+        Lista paczkomatów ({localStorage.getItem("district")})
       </Header>
       <Grid>
         <Grid.Row columns={3}>

@@ -89,10 +89,12 @@ const AddUser = () => {
 
   return (
     <>
-      <Button icon labelPosition="left">
-        <Icon name="arrow left" />
-        <Link href="/admin">Powrót</Link>
-      </Button>
+      <Link href="/admin">
+        <Button color="orange" inverted icon labelPosition="left">
+          <Icon name="arrow left" />
+          Powrót
+        </Button>
+      </Link>
       <Grid
         className="login-grid"
         textAlign="center"

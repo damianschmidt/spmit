@@ -1,140 +1,159 @@
 body {
-    margin: 0;
-    background-image: url("../img/prism.png");
+  margin: 0;
+  background-image: url("../img/prism.png");
 }
 
 .container-header {
-    padding: 10px 0;
+  padding: 10px 0;
 }
 
 .logo-img {
-    margin-right: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.menu-header::before {
+  display: none;
 }
 
 .localization-form {
-    margin: 0 !important;
-    padding-bottom: 0 !important;
+  margin: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .form-header {
-    margin-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 .login-header {
-    color: #ff8c00 !important;
-    text-align: center;
+  color: #ff8c00 !important;
+  text-align: center;
 }
 
 .login-grid {
-    height: 90vh;
-    margin: auto;
+  height: 90vh;
+  margin: auto;
 }
 
 .login-grid-column {
-    max-width: 450px !important;
+  max-width: 450px !important;
 }
 
 .chekcbox-btn {
-    outline: none;
-    color: #f9fafb;
-    border: none;
-    box-shadow: 0 0 0 2px #d4d4d5 inset;
-    background-color: transparent;
-    font-weight: 400;
-    border-radius: 0.3rem;
-    font-size: 1rem;
-    cursor: pointer;
-    font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
-    width: 9em;
-    margin: 0.25em;
-    padding: 0.7em 1.2em;
-    line-height: 1em;
-    transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease, -webkit-box-shadow 0.1s ease;
-    box-sizing: border-box;
+  outline: none;
+  color: #f9fafb;
+  border: none;
+  box-shadow: 0 0 0 2px #d4d4d5 inset;
+  background-color: transparent;
+  font-weight: 400;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+  width: 9em;
+  margin: 0.25em;
+  padding: 0.7em 1.2em;
+  line-height: 1em;
+  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease,
+    box-shadow 0.1s ease, background 0.1s ease, -webkit-box-shadow 0.1s ease;
+  box-sizing: border-box;
 }
 
 .chekcbox-btn:hover {
-    background-color: #cfd0d2;
-    box-shadow: none !important;
-    color: rgba(0, 0, 0, 0.6);
+  background-color: #cfd0d2;
+  box-shadow: none !important;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .chekcbox-btn-active {
-    background-color: #f2711c;
-    color: #fff;
-    text-shadow: none;
-    box-shadow: none;
-    font-weight: 700;
-    background-image: none;
+  background-color: #f2711c;
+  color: #fff;
+  text-shadow: none;
+  box-shadow: none;
+  font-weight: 700;
+  background-image: none;
 }
 
 .chekcbox-btn-active:hover {
-    background-color: #f26202;
+  background-color: #f26202;
 }
 
 .road-info .heading,
 .road-info .direction {
-    font-weight: 700;
-    text-transform: capitalize;
-    color: #fff;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #fff;
 }
 
 .road-info .street {
-    font-weight: 700;
-    color: #f2711c;
+  font-weight: 700;
+  color: #f2711c;
 }
 
 .road-info .distance-description,
 .road-info .sign {
-    color: #d4d4d5;
-    font-size: 0.75em;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    word-spacing: 0.1em;
+  color: #d4d4d5;
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  word-spacing: 0.1em;
 }
 
 .road-info .distance-description {
-    display: block;
-    margin-top: 1em;
-    border-top: 2px solid #444;
+  display: block;
+  margin-top: 1em;
+  border-top: 2px solid #444;
 }
 
 .road-info .length {
-    font-weight: 700;
-    color: #fff;
+  font-weight: 700;
+  color: #fff;
 }
 
 .road-info .next-street {
-    color: #f26202;
+  color: #f26202;
 }
 
 .here-map {
-    height: 500px;
-    border-radius: 0.3rem;
-    overflow: hidden;
+  height: 500px;
+  border-radius: 0.3rem;
+  overflow: hidden;
 }
 
 .form-admin-panel {
-    margin: auto;
+  margin: auto;
 }
 
 .form-admin-panel .grid-column {
-    margin: 0.5em 0;
+  margin: 0.5em 0;
 }
 
 .card-admin-panel {
-    background-color: #1b1c1d !important;
-    box-shadow: none !important;
+  background-color: #1b1c1d !important;
+  box-shadow: none !important;
 }
 
 .card-admin-panel .header {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 .card-admin-panel .meta {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 .card-admin-panel .description {
-    color: #fff !important;
+  color: #fff !important;
+}
+
+.dimmable > .modals {
+  background-color: #00000030;
+}
+
+@media (max-width: 540px) {
+  .menu-mobile {
+    display: none !important;
+  }
+
+  a[href="/logout"] {
+    border: none;
+  }
 }

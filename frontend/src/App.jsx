@@ -5,6 +5,7 @@ import HeaderBar from "./components/HeaderBar";
 import RoadDetailForm from "./components/RoadDetailsForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
+import AdminRoute from "./components/AdminRoute";
 import RoadInfo from "./components/RoadInfo";
 import LoginForm from "./components/LoginPanel";
 import AdminPanel from "./components/AdminPanel";
@@ -59,28 +60,16 @@ const App = () => {
               </Container>
             )}
           </Route>
-          <Route exact path="/admin">
-            {isLogged ? (
-              <Container>
-                <AdminPanel />
-              </Container>
-            ) : (
-              <Container>
-                <LoginForm />
-              </Container>
-            )}
-          </Route>
-          <Route exact path="/add-user">
-            {isLogged ? (
-              <Container>
-                <AddUser />
-              </Container>
-            ) : (
-              <Container>
-                <LoginForm />
-              </Container>
-            )}
-          </Route>
+          <AdminRoute exact path="/admin">
+            <Container>
+              <AdminPanel />
+            </Container>
+          </AdminRoute>
+          <AdminRoute exact path="/add-user">
+            <Container>
+              <AddUser />
+            </Container>
+          </AdminRoute>
           <PublicRoute exact path="/login">
             <Container>
               <LoginForm />
