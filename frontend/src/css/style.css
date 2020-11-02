@@ -154,7 +154,6 @@ body {
   }
 
   a[href="/logout"] {
-    box-shadow: tomato !important;
     border: none;
   }
 }
