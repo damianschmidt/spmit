@@ -17,6 +17,7 @@ function calculateRouteFromAtoB(platform, H, hMap, ui, start, end) {
     },
     onError
   );
+  addSVGMarkers(hMap, H, end);
 }
 
 function onError(error) {
@@ -41,23 +42,41 @@ function openBubble(position, text, H, ui) {
 
 function addRouteShapeToMap(route, H, hMap) {
   route.sections.forEach((section) => {
-    // decode LineString from the flexible polyline
+    // Create a linestring to use as a point source for the route line
     let linestring = H.geo.LineString.fromFlexiblePolyline(section.polyline);
 
     // Create a polyline to display the route:
-    let polyline = new H.map.Polyline(linestring, {
+    let routeLine = new H.map.Polyline(linestring, {
+      style: { strokeColor: "blue", lineWidth: 3 },
+    });
+
+    // Create a marker for the start point:
+    let routeOutline = new H.map.Polyline(linestring, {
       style: {
-        lineWidth: 4,
+        lineWidth: 5,
         strokeColor: "rgba(0, 128, 255, 0.7)",
+        lineTailCap: "arrow-tail",
+        lineHeadCap: "arrow-head",
       },
     });
 
-    // Add the polyline to the map
-    hMap.addObject(polyline);
-    // And zoom to its bounding rectangle
-    hMap.getViewModel().setLookAtData({
-      bounds: polyline.getBoundingBox(),
+    // Create a marker for the end point:
+    let routeArrows = new H.map.Polyline(linestring, {
+      style: {
+        lineWidth: 5,
+        fillColor: "white",
+        strokeColor: "rgba(255, 255, 255, 1)",
+        lineDash: [0, 2],
+        lineTailCap: "arrow-tail",
+        lineHeadCap: "arrow-head",
+      },
     });
+
+    // Add the route polyline and the two markers to the map:
+    hMap.addObjects([routeLine, routeOutline, routeArrows]);
+
+    // Set the map's viewport to make the whole route visible:
+    hMap.getViewModel().setLookAtData({ bounds: routeLine.getBoundingBox() });
   });
 }
 
@@ -69,7 +88,7 @@ function addManueversToMap(route, H, hMap, ui) {
   let svgMarkup =
       '<svg width="18" height="18" ' +
       'xmlns="http://www.w3.org/2000/svg">' +
-      '<circle cx="8" cy="8" r="6" ' +
+      '<circle cx="8" cy="8" r="4" ' +
       'fill="#1b468d" stroke="white" stroke-width="1"  />' +
       "</svg>",
     dotIcon = new H.map.Icon(svgMarkup, { anchor: { x: 8, y: 8 } }),
@@ -130,11 +149,42 @@ function lockersCoorinates(waypoints, lockersDetails) {
     waypoints.forEach((waypoint) => {
       const result = [...lockersDetails].filter((e) => e.name === waypoint);
       if (result.length !== 0) {
-        lockers.push({ lat: result[0].latitude, lng: result[0].longitude });
+        lockers.push({
+          lat: result[0].latitude,
+          lng: result[0].longitude,
+          name: result[0].name,
+        });
       }
     });
   }
   return lockers;
 }
 
+function addSVGMarkers(map, H, locker) {
+  //Create the svg mark-up
+  const name = [...locker.name]
+    .filter(
+      (e) => (e !== "W") & (e !== "R") & (e !== "O") & (e !== "P") & (e !== "-")
+    )
+    .join("");
+
+  const svgMarkup =
+    '<svg  width="24" height="24" xmlns="http://www.w3.org/2000/svg">' +
+    '<rect stroke="black" fill="${FILL}" x="1" y="1" width="22" height="22" />' +
+    '<text x="12" y="18" font-size="7pt" font-family="Arial" font-weight="bold" ' +
+    'text-anchor="middle" fill="${STROKE}" >' +
+    name +
+    "</text></svg>";
+
+  // Add marker.
+  const cubsIcon = new H.map.Icon(
+      svgMarkup.replace("${FILL}", "white").replace("${STROKE}", "orange")
+    ),
+    cubsMarker = new H.map.Marker(
+      { lat: locker.lat, lng: locker.lng },
+      { icon: cubsIcon }
+    );
+
+  map.addObject(cubsMarker);
+}
 export { calculateRouteFromAtoB, displayMarker, lockersCoorinates };

@@ -89,10 +89,18 @@ const AdminPanel = () => {
         </Grid.Column>
         <Grid.Column>
           <Container textAlign="right">
-            <Button size={"tiny"} icon labelPosition="right">
-              <Icon name="add" />
-              <Link href="/add-user">Dodaj użytkownika</Link>
-            </Button>
+            <Link href="/add-user">
+              <Button
+                inverted
+                color="orange"
+                size={"tiny"}
+                icon
+                labelPosition="right"
+              >
+                <Icon name="add" />
+                Dodaj użytkownika
+              </Button>
+            </Link>
           </Container>
         </Grid.Column>
       </Grid>
@@ -100,7 +108,11 @@ const AdminPanel = () => {
       <Grid stackable>
         <Grid.Row columns={3}>
           {users.map((user) => (
-            <Form onSubmit={handleSubmit} className="form-admin-panel">
+            <Form
+              key={user.key}
+              onSubmit={handleSubmit}
+              className="form-admin-panel"
+            >
               <Grid.Column
                 className={"form-admin-panel grid-column"}
                 stretched
@@ -149,7 +161,7 @@ const AdminPanel = () => {
                             labelPosition="right"
                             icon="checkmark"
                             onClick={(() => setOpenDelModal(false), modifyBtn)}
-                            positive
+                            color="orange"
                           />
                         </Modal.Actions>
                       </Modal>
