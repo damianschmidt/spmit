@@ -53,7 +53,7 @@ def get_directions(path, courier_latitude, courier_longitude):
     threads = []
     with ThreadPoolExecutor(max_workers=20) as executor:
         for i in range(len(path) - 1):
-            locker_a = lockers_dicts[path[0]]
+            locker_a = lockers_dicts[path[i]]
             locker_b = lockers_dicts[path[i+1]]
             threads.append(executor.submit(download_data, locker_a, locker_b))
 
