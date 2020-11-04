@@ -15,6 +15,10 @@ body {
   display: none;
 }
 
+.header-link.active {
+  background: transparent !important;
+}
+
 .localization-form {
   margin: 0 !important;
   padding-bottom: 0 !important;
@@ -75,6 +79,11 @@ body {
 
 .chekcbox-btn-active:hover {
   background-color: #f26202;
+}
+
+.road-info {
+  height: 70vh;
+  overflow-x: auto;
 }
 
 .road-info .heading,

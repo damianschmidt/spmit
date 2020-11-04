@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Container, Image, Menu } from "semantic-ui-react";
 import logoImage from "../img/logo.png";
 import Link from "./Link";
 
 const HeaderBar = () => {
+  const [isActive, setIsActive] = useState();
+
+  useEffect(() => {
+    if (!!localStorage.getItem("isLogged")) {
+      setIsActive(false);
+    } else {
+      setIsActive(true);
+    }
+  }, []);
+
   return (
     <Menu inverted>
       <Container>
-        <Link href="/">
+        <Link href="/" isActive={isActive}>
           <Image size="mini" src={logoImage} className="logo-img" />
           SPMiT
         </Link>
-        <Link href="/" class="menu-mobile">
+        <Link href="/" class="menu-mobile" isActive={isActive}>
           Home
         </Link>
         {!!localStorage.getItem("isLogged") ? (
@@ -22,7 +32,11 @@ const HeaderBar = () => {
               ""
             )}
             <Menu.Item position="right" className="menu-header">
-              <Menu.Item className="menu-mobile menu-header" as="a">
+              <Menu.Item
+                className="menu-mobile menu-header header-link"
+                as="a"
+                active
+              >
                 {localStorage.getItem("name")}
               </Menu.Item>
               <Button as="a" inverted href="/logout">
