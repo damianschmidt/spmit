@@ -4,7 +4,7 @@ import logoImage from "../img/logo.png";
 import Link from "./Link";
 
 const HeaderBar = () => {
-  const [isActive, setIsActive] = useState();
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
     if (!!localStorage.getItem("isLogged")) {
