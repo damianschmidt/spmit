@@ -23,16 +23,19 @@ const LoginForm = () => {
       }
     );
 
-    const details = await axios.get(
-      `http://localhost:5000/api/1/users/${username}`
-    );
-
     if (response.data) {
-      window.location.pathname = "/";
+      const details = await axios.get(
+        `http://localhost:5000/api/1/users/${username}`
+      );
       localStorage.setItem("name", details.data.username);
       localStorage.setItem("role", details.data.role);
       localStorage.setItem("district", details.data.district);
       localStorage.setItem("isLogged", true);
+      if (details.data.role == "admin") {
+        window.location.pathname = "/admin";
+      } else {
+        window.location.pathname = "/";
+      }
     } else {
       setDataErrorState(true);
     }
