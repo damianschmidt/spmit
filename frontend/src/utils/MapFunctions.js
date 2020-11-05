@@ -161,6 +161,7 @@ function lockersCoorinates(waypoints, lockersDetails) {
 }
 
 function addSVGMarkers(map, H, locker) {
+  if (locker.name === "") return;
   //Create the svg mark-up
   const name = [...locker.name]
     .filter(
@@ -170,15 +171,15 @@ function addSVGMarkers(map, H, locker) {
 
   const svgMarkup =
     '<svg  width="24" height="24" xmlns="http://www.w3.org/2000/svg">' +
-    '<rect stroke="black" fill="${FILL}" x="1" y="1" width="22" height="22" />' +
+    '<rect stroke="black" fill="FILL" x="1" y="1" width="22" height="22" />' +
     '<text x="12" y="18" font-size="7pt" font-family="Arial" font-weight="bold" ' +
-    'text-anchor="middle" fill="${STROKE}" >' +
+    'text-anchor="middle" fill="STROKE" >' +
     name +
     "</text></svg>";
 
   // Add marker.
   const cubsIcon = new H.map.Icon(
-      svgMarkup.replace("${FILL}", "white").replace("${STROKE}", "orange")
+      svgMarkup.replace("FILL", "white").replace("STROKE", "orange")
     ),
     cubsMarker = new H.map.Marker(
       { lat: locker.lat, lng: locker.lng },

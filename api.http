@@ -19,9 +19,9 @@ POST http://localhost:5000/api/1/here_api/directions
 Content-Type: application/json
  
  {
-   "path": ["courier", "WRO88M","WRO911","WRO33A", "courier"], 
-   "courier_latitude": 51.09907, 
-   "courier_longitude": 17.027580
+   "path": ["courier", "WRO15M","WRO24N", "courier"], 
+   "courier_latitude": 51.1075, 
+   "courier_longitude": 17.0418
 }
 
 

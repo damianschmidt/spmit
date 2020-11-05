@@ -38,6 +38,13 @@ const Map = ({ waypoints, latitude, longtitude, lockersDetails }) => {
         mapFn.calculateRouteFromAtoB(platform, H, hMap, ui, start, locker);
         start = locker;
       });
+
+      // Come back
+      mapFn.calculateRouteFromAtoB(platform, H, hMap, ui, start, {
+        lat: latitude,
+        lng: longtitude,
+        name: "",
+      });
     }
 
     // This will act as a cleanup to run once this hook runs again.
