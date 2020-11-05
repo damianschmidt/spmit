@@ -32,13 +32,13 @@ def get_route(a_latitude, a_longitude, b_latitude, b_longitude):
     return data
 
 
-def download_data(locker_a, locker_b):
+def download_data(index, locker_a, locker_b):
     a_latitude, a_longitude = locker_a[0], locker_a[1]
     b_latitude, b_longitude = locker_b[0], locker_b[1]
     route_data = get_route(a_latitude, a_longitude, b_latitude, b_longitude)
     maneuvers = route_data['response']['route'][0]['leg'][0]['maneuver']
     instructions = [data['instruction'] for data in maneuvers]
-    return instructions
+    return index, instructions
 
 
 def get_directions(path, courier_latitude, courier_longitude):
@@ -49,15 +49,16 @@ def get_directions(path, courier_latitude, courier_longitude):
                      for locker in lockers}
     lockers_dicts['courier'] = [courier_latitude, courier_longitude]
 
-    directions = []
+    directions_dict = {}
     threads = []
     with ThreadPoolExecutor(max_workers=20) as executor:
         for i in range(len(path) - 1):
             locker_a = lockers_dicts[path[i]]
             locker_b = lockers_dicts[path[i+1]]
-            threads.append(executor.submit(download_data, locker_a, locker_b))
+            threads.append(executor.submit(download_data, i, locker_a, locker_b))
 
         for task in as_completed(threads):
-            directions.append(task.result())
-
-    return directions
+            result = task.result()
+            directions_dict[result[0]] = result[1]
+            
+    return [directions_value for directions_value in directions_dict.values()]
