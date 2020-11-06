@@ -31,7 +31,7 @@ const LoginForm = () => {
       localStorage.setItem("role", details.data.role);
       localStorage.setItem("district", details.data.district);
       localStorage.setItem("isLogged", true);
-      if (details.data.role == "admin") {
+      if (details.data.role === "admin") {
         window.location.pathname = "/admin";
       } else {
         window.location.pathname = "/";
