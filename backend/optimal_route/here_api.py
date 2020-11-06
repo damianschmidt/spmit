@@ -49,7 +49,7 @@ def get_directions(path, courier_latitude, courier_longitude):
                      for locker in lockers}
     lockers_dicts['courier'] = [courier_latitude, courier_longitude]
 
-    directions_dict = {}
+    directions = [None] * (len(path) - 1)
     threads = []
     with ThreadPoolExecutor(max_workers=20) as executor:
         for i in range(len(path) - 1):
@@ -59,6 +59,6 @@ def get_directions(path, courier_latitude, courier_longitude):
 
         for task in as_completed(threads):
             result = task.result()
-            directions_dict[result[0]] = result[1]
+            directions[result[0]] = result[1]
             
-    return [directions_value for directions_value in directions_dict.values()]
+    return directions
