@@ -9,10 +9,12 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
 
   useEffect(() => {
     (async () => {
+      const district = !!localStorage.getItem("district")
+        ? `/${localStorage.getItem("district")}`
+        : "";
+
       const response = await axios.get(
-        `http://localhost:5000/api/1/lockers/${localStorage.getItem(
-          "district"
-        )}`,
+        `http://localhost:5000/api/1/lockers${district}`,
         {}
       );
 
@@ -31,7 +33,7 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   return (
     <>
       <Header size="small" inverted className="form-header">
-        Lista paczkomatów ({localStorage.getItem("district")})
+        Lista paczkomatów: {localStorage.getItem("district")}
       </Header>
       <Grid>
         <Grid.Row columns={3}>

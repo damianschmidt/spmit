@@ -22,7 +22,7 @@ const HeaderBar = () => {
           SPMiT
         </Link>
         <Link href="/" class="menu-mobile" isActive={isActive}>
-          Home
+          Strona Główna
         </Link>
         {!!localStorage.getItem("isLogged") ? (
           <>
@@ -40,7 +40,7 @@ const HeaderBar = () => {
                 {localStorage.getItem("name")}
               </Menu.Item>
               <Button as="a" inverted href="/logout">
-                Logout
+                Wyloguj
               </Button>
             </Menu.Item>
           </>
@@ -48,7 +48,7 @@ const HeaderBar = () => {
           <>
             <Menu.Item position="right" className="menu-header">
               <Button as="a" inverted href="/login">
-                Login
+                Zaloguj
               </Button>
             </Menu.Item>
           </>

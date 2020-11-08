@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  /* This pattern is downloaded from www.subtlepatterns.com  */
   background-image: url("../img/prism.png");
 }
 
@@ -122,8 +123,30 @@ body {
   color: #f26202;
 }
 
+.destination {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.destination::before {
+  display: inline-block;
+  content: " ";
+  width: 10px;
+  height: 10px;
+}
+
+.destination::after {
+  display: block;
+  content: " ";
+  margin: 1px 0 20px 10px;
+  width: 63%;
+  height: 2px;
+  background-color: #f26202;
+}
+
 .here-map {
-  height: 500px;
+  height: 590px;
   border-radius: 0.3rem;
   overflow: hidden;
 }

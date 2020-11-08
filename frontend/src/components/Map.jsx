@@ -53,9 +53,7 @@ const Map = ({ waypoints, latitude, longtitude, lockersDetails }) => {
     };
   }, [mapRef, latitude, longtitude, waypoints, lockersDetails]);
 
-  return (
-    <div className="map here-map" ref={mapRef} style={{ height: "500px" }} />
-  );
+  return <div className="map here-map" ref={mapRef} />;
 };
 
 export default Map;
