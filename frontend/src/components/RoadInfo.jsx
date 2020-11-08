@@ -26,13 +26,30 @@ const RoadInfo = ({
   }, [lockersResultList, latitude, longtitude]);
 
   // split text on single sentences and insert new line sign
-  const formatText = (text) => text.join("").split(".").join(".<br />");
+  const formatText = (text) => {
+    const road = text.join("").split(" ");
+    road.forEach((element, index) => {
+      if (element === "Cel") {
+        road[index] = '<div class="destination">Cel';
+      }
+      if (element === "stronie.") {
+        road[index] = "stronie.</div>";
+      }
+    });
+
+    return road.join(" ").split(".").join(".<br />");
+  };
+
+  const showTravelTime = () =>
+    lockersResultList.cost
+      ? new Date(lockersResultList.cost * 1000).toISOString().substr(11, 8)
+      : "";
 
   return (
     <Grid columns={2} inverted divided stackable reversed="mobile vertically">
       <Grid.Column width={6}>
         <Segment inverted className="road-info">
-          <Header as="h4" icon="road" content="Road Details" />
+          <Header as="h4" icon="road" content="Szczegóły trasy" />
           {[...roadInfo].map((e, index) => {
             return (
               <div key={index}>
@@ -56,6 +73,7 @@ const RoadInfo = ({
         ) : (
           <Map />
         )}
+        <Segment inverted>Czas podróży: {showTravelTime()}</Segment>
       </Grid.Column>
     </Grid>
   );
