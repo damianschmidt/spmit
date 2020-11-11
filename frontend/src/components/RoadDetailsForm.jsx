@@ -79,7 +79,7 @@ const RoadDetailsForm = ({
               content="Proszę wybrać paczkomat z listy"
             />
             <Form.Button floated="right" color="orange" size="large">
-              Zapisz
+              Wyznacz
             </Form.Button>
             <div style={{ clear: "both" }}></div>
           </Form>
