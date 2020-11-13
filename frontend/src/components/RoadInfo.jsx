@@ -76,8 +76,8 @@ const RoadInfo = ({
         )}
         <Segment inverted>
           Paczkomaty:{" "}
-          {lockersArr.map((e) => (
-            <span>{`${e} `}</span>
+          {lockersArr.map((element) => (
+            <span>{`${element} `}</span>
           ))}
         </Segment>
         <Segment inverted>Czas podróży: {showTravelTime()}</Segment>
