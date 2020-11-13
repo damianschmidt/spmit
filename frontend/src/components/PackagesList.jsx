@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Button, Grid, Icon, Input, List, Modal } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  Icon,
+  Input,
+  List,
+  Modal,
+} from "semantic-ui-react";
 
 const packages = [
   "pn_9_11.json",
@@ -11,6 +19,16 @@ const packages = [
 
 const PackagesList = () => {
   const [open, setOpen] = useState(false);
+
+  const handleSubmit = (e) => {
+    // const reader = new FileReader();
+    console.log(e.target.files[0]);
+    // reader.readAsText(e.target.files[0]);
+    // reader.onload = () => {
+    //   const text = JSON.parse(reader.result);
+    //   console.log(text);
+    // };
+  };
 
   return (
     <div>
@@ -28,8 +46,8 @@ const PackagesList = () => {
         <Modal.Header>Lista paczek</Modal.Header>
         <div className="package-list-content">
           <List as="ol">
-            {packages.map((e) => (
-              <List.Item as="li">
+            {packages.map((e, key) => (
+              <List.Item as="li" key={key}>
                 <div className="package-order-li">
                   <div className="package-order-li-name">{e}</div>
                   <div className="package-order-li-icon">
@@ -39,18 +57,25 @@ const PackagesList = () => {
               </List.Item>
             ))}
           </List>
-          <Grid columns={2}>
-            <Grid.Column width={10}>
-              <Modal.Description>
-                <Input fluid type="file" />
-              </Modal.Description>
-            </Grid.Column>
-            <Grid.Column width={6}>
-              <Modal.Actions>
-                <Button content="Dodaj" icon="plus" color="orange" />
-              </Modal.Actions>
-            </Grid.Column>
-          </Grid>
+          <Form onSubmit={handleSubmit}>
+            <Grid columns={2}>
+              <Grid.Column width={10}>
+                <Modal.Description>
+                  <Input
+                    fluid
+                    type="file"
+                    accept=".json"
+                    onChange={handleSubmit}
+                  />
+                </Modal.Description>
+              </Grid.Column>
+              <Grid.Column width={6}>
+                <Modal.Actions>
+                  <Button content="Dodaj" icon="plus" color="orange" />
+                </Modal.Actions>
+              </Grid.Column>
+            </Grid>
+          </Form>
         </div>
       </Modal>
     </div>

@@ -294,6 +294,11 @@ body {
   width: 20px;
 }
 
+.item:hover {
+  background-color: #f2711c !important;
+  color: white !important;
+}
+
 @media (max-width: 540px) {
   .menu-mobile {
     display: none !important;
