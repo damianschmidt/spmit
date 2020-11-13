@@ -19,6 +19,7 @@ const App = () => {
   const [lockersResultList, setLockersResultList] = useState({});
   const [lockersDetails, setLockersDetails] = useState([]);
   const [isLogged, setIsLogged] = useState();
+  const [lockersArr, setLockersArr] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("isLogged") === null) {
@@ -46,12 +47,14 @@ const App = () => {
                   setLockersResultList={setLockersResultList}
                   setLatitude={setLatitude}
                   setLongtitude={setLongtitude}
+                  setLockersArr={setLockersArr}
                 />
                 <RoadInfo
                   lockersDetails={lockersDetails}
                   lockersResultList={lockersResultList}
                   latitude={latitude}
                   longtitude={longtitude}
+                  lockersArr={lockersArr}
                 />
               </Container>
             ) : (

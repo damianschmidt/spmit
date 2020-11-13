@@ -9,6 +9,7 @@ const RoadDetailsForm = ({
   setLockersResultList,
   setLatitude,
   setLongtitude,
+  setLockersArr,
 }) => {
   const [activeIndex, setActiveIndex] = useState(true);
   const [lockers, setLockers] = useState([]);
@@ -38,6 +39,8 @@ const RoadDetailsForm = ({
           courier_longitude: 17.0,
         }
       );
+
+      setLockersArr(lockersArray);
 
       // validate latitude, longitude
       if (parseFloat(lat) && parseFloat(lng)) {

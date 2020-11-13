@@ -8,6 +8,7 @@ const RoadInfo = ({
   lockersResultList,
   latitude,
   longtitude,
+  lockersArr,
 }) => {
   const [roadInfo, setRoadInfo] = useState("");
 
@@ -73,6 +74,12 @@ const RoadInfo = ({
         ) : (
           <Map />
         )}
+        <Segment inverted>
+          Paczkomaty:{" "}
+          {lockersArr.map((e) => (
+            <span>{`${e} `}</span>
+          ))}
+        </Segment>
         <Segment inverted>Czas podróży: {showTravelTime()}</Segment>
       </Grid.Column>
     </Grid>
