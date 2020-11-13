@@ -46,9 +46,9 @@ POST http://localhost:5000/api/1/lockers/route
 Content-Type: application/json
 
 {
-  "lockers_list": ["WRO88M","WRO911","WRO33A"], 
-  "courier_latitude": 51.09907, 
-  "courier_longitude": 17.027580
+  "lockers_list": ["WRO15M","WRO24N","WRO49M"], 
+  "courier_latitude": 51.1075, 
+  "courier_longitude": 17.0418
 }
 
 
