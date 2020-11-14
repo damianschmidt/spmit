@@ -294,7 +294,7 @@ body {
   width: 20px;
 }
 
-.item:hover {
+.segment .dropdown .item:hover {
   background-color: #f2711c !important;
   color: white !important;
 }

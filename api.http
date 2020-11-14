@@ -105,3 +105,25 @@ Content-Type: application/json
   "username": "kamildudek",
   "password": "kamildudek_password"
 }
+
+
+# get list of files
+###
+GET http://localhost:5000/api/1/package_lists
+
+
+# send file to server
+###
+POST http://localhost:5000/api/1/package_lists
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="package.json"
+Content-Type: file/json
+
+< ./package.json
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
