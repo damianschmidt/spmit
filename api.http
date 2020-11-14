@@ -114,7 +114,7 @@ GET http://localhost:5000/api/1/package_lists
 
 # get package list lockers
 ###
-GET http://localhost:5000/api/1/package_lists/list_name
+GET http://localhost:5000/api/1/package_lists/pn_16_11
 
 
 # add package list
@@ -127,10 +127,10 @@ Content-Disposition: form-data; name="file"
 
 title
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="file"; filename="package.json"
+Content-Disposition: form-data; name="file"; filename="pn_16_11.json"
 Content-Type: file/json
 
-< ./package.json
+< ./pn_16_11.json
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 
@@ -140,5 +140,5 @@ DELETE http://localhost:5000/api/1/package_lists
 Content-Type: application/json
 
 {
-  "name": "list_name"
+  "name": "pn_16_11"
 }

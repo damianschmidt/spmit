@@ -4,16 +4,9 @@ import uniqid from "uniqid";
 import { Dropdown, Grid, Header, Segment } from "semantic-ui-react";
 import CheckboxBtn from "./CheckboxBtn";
 
-const packages = [
-  { text: "pn_9_11.json", value: "pn_9_11.json", key: "pn_9_11.json" },
-  { text: "wt_10_11.json", value: "wt_10_11.json", key: "wt_10_11.json" },
-  { text: "sr_11_11.json", value: "sr_11_11.json", key: "sr_11_11.json" },
-  { text: "cz_12_11.json", value: "cz_12_11.json", key: "cz_12_11.json" },
-  { text: "pt_13_11.json", value: "pt_13_11.json", key: "pt_13_11.json" },
-];
-
 const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   const [options, setOptions] = useState([]);
+  const [packages, setPackages] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -26,6 +19,15 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
         {}
       );
 
+      const list = await axios.get("http://localhost:5000/api/1/package_lists");
+      setPackages(
+        list.data.map((name, index) => ({
+          text: name,
+          value: name,
+          key: index,
+        }))
+      );
+
       setLockersDetails(response.data);
 
       setOptions(
@@ -33,10 +35,26 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
           key: uniqid(),
           text: e.name,
           value: e.name,
+          active: null,
         }))
       );
     })();
   }, [setLockersDetails]);
+
+  const handleChange = async (e) => {
+    const response = await axios.get(
+      `http://localhost:5000/api/1/package_lists/${e.target.textContent}`
+    );
+
+    setOptions(
+      options.map((e) => ({
+        key: e.key,
+        text: e.text,
+        value: e.value,
+        active: response.data.includes(e.text) ? e.value : null,
+      }))
+    );
+  };
 
   return (
     <>
@@ -51,6 +69,7 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
                 value={option.value}
                 lockers={lockers}
                 setLockers={setLockers}
+                active={option.active}
               />
             </Grid.Column>
           ))}
@@ -61,7 +80,13 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
         Wybierz paczkomaty automatycznie na podstawie listy
       </Header>
       <Segment inverted>
-        <Dropdown placeholder="Paczki" search selection options={packages} />
+        <Dropdown
+          placeholder="Paczki"
+          search
+          selection
+          options={packages}
+          onChange={handleChange}
+        />
       </Segment>
     </>
   );

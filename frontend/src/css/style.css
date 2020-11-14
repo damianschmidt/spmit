@@ -299,6 +299,14 @@ body {
   color: white !important;
 }
 
+.delete-icon {
+  color: #f2711c;
+}
+
+.delete-icon:hover {
+  color: red;
+}
+
 @media (max-width: 540px) {
   .menu-mobile {
     display: none !important;

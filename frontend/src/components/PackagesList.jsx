@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import FormData from "form-data";
 import {
@@ -11,34 +11,42 @@ import {
   Modal,
 } from "semantic-ui-react";
 
-const packages = [
-  "pn_9_11.json",
-  "wt_10_11.json",
-  "sr_11_11.json",
-  "cz_12_11.json",
-  "pt_13_11.json",
-];
-
 const PackagesList = () => {
   const [open, setOpen] = useState(false);
+  const [packages, setPackages] = useState([]);
+
+  const setPackagesList = async () => {
+    const list = await axios.get("http://localhost:5000/api/1/package_lists");
+    setPackages(list.data);
+  };
+
+  useEffect(() => {
+    setPackagesList();
+  }, []);
 
   const handleSubmit = async (e) => {
     const file = e.target.elements[0].files[0];
-    const formData = new FormData();
-    formData.append("file", file);
-    const res = await axios.post(
-      "http://localhost:5000/api/1/package_lists",
-      formData,
-      {
-        // You need to use `getHeaders()` in Node.js because Axios doesn't
-        // automatically set the multipart form boundary in Node.
+    if (file && file.name.includes(".json")) {
+      const formData = new FormData();
+      formData.append("file", file);
+      await axios.post("http://localhost:5000/api/1/package_lists", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      }
-    );
+      });
+      setPackagesList();
+    }
+  };
 
-    console.log(res);
+  const removePackage = async (e) => {
+    const packageName =
+      e.target.parentElement.previousElementSibling.textContent;
+    await axios("http://localhost:5000/api/1/package_lists", {
+      method: "DELETE",
+      data: JSON.stringify({ name: packageName }),
+      headers: { "Content-Type": "application/json" },
+    });
+    setPackagesList();
   };
 
   return (
@@ -62,7 +70,11 @@ const PackagesList = () => {
                 <div className="package-order-li">
                   <div className="package-order-li-name">{e}</div>
                   <div className="package-order-li-icon">
-                    <Icon name="delete" color="orange" />
+                    <Icon
+                      name="delete"
+                      onClick={removePackage}
+                      className="delete-icon"
+                    />
                   </div>
                 </div>
               </List.Item>
