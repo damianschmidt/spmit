@@ -19,7 +19,13 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
         {}
       );
 
-      const list = await axios.get("http://localhost:5000/api/1/package_lists");
+      const userName =
+        localStorage.getItem("name") === "admin"
+          ? ""
+          : `/${localStorage.getItem("name")}`;
+      const list = await axios.get(
+        `http://localhost:5000/api/1/package_lists${userName}`
+      );
       setPackages(
         list.data.map((name, index) => ({
           text: name,

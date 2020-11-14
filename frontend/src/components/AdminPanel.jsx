@@ -134,7 +134,7 @@ const AdminPanel = () => {
                     />
                   </Card.Content>
                   <Card.Content className="package-list">
-                    <PackagesList />
+                    <PackagesList user={user.value} />
                   </Card.Content>
                   <Card.Content extra>
                     <div className="ui two buttons">

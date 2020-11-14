@@ -11,12 +11,14 @@ import {
   Modal,
 } from "semantic-ui-react";
 
-const PackagesList = () => {
+const PackagesList = ({ user }) => {
   const [open, setOpen] = useState(false);
   const [packages, setPackages] = useState([]);
 
   const setPackagesList = async () => {
-    const list = await axios.get("http://localhost:5000/api/1/package_lists");
+    const list = await axios.get(
+      `http://localhost:5000/api/1/package_lists/${user}`
+    );
     setPackages(list.data);
   };
 
@@ -29,11 +31,15 @@ const PackagesList = () => {
     if (file && file.name.includes(".json")) {
       const formData = new FormData();
       formData.append("file", file);
-      await axios.post("http://localhost:5000/api/1/package_lists", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        `http://localhost:5000/api/1/package_lists/${user}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       setPackagesList();
     }
   };
@@ -43,7 +49,7 @@ const PackagesList = () => {
       e.target.parentElement.previousElementSibling.textContent;
     await axios("http://localhost:5000/api/1/package_lists", {
       method: "DELETE",
-      data: JSON.stringify({ name: packageName }),
+      data: JSON.stringify({ name: packageName, courier: user }),
       headers: { "Content-Type": "application/json" },
     });
     setPackagesList();

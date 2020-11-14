@@ -145,6 +145,6 @@ DELETE http://localhost:5000/api/1/package_lists
 Content-Type: application/json
 
 {
-  "name": "pn_16_11"
+  "name": "pn_16_11",
   "courier": "kamildudek"
 }
