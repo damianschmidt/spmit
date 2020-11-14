@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import FormData from "form-data";
-import fs from "fs";
 import {
   Button,
   Form,
