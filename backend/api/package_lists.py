@@ -83,6 +83,9 @@ def delete_package_list():
         return jsonify({'error': str(error)}), 400
 
     package_lists_db = PackageListsDbTools()
-    package_list_index = {'name': data_dict['name']}
+    package_list_index = {
+        'name': data_dict['name'],
+        'courier': data_dict['courier']
+    }
     package_lists_db.delete_package_list(package_list_index)
     return jsonify(package_list_index), 200
