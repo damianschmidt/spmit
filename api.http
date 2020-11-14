@@ -107,12 +107,17 @@ Content-Type: application/json
 }
 
 
-# get list of files
+# get package list names
 ###
 GET http://localhost:5000/api/1/package_lists
 
 
-# send file to server
+# get package list lockers
+###
+GET http://localhost:5000/api/1/package_lists/list_name
+
+
+# add package list
 ###
 POST http://localhost:5000/api/1/package_lists
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -127,3 +132,13 @@ Content-Type: file/json
 
 < ./package.json
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+# delete package list
+###
+DELETE http://localhost:5000/api/1/package_lists
+Content-Type: application/json
+
+{
+  "name": "list_name"
+}
