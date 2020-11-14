@@ -7,6 +7,7 @@ import CheckboxBtn from "./CheckboxBtn";
 const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   const [options, setOptions] = useState([]);
   const [packages, setPackages] = useState([]);
+  const [lockersForomFile] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -76,6 +77,7 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
                 lockers={lockers}
                 setLockers={setLockers}
                 active={option.active}
+                lockersForomFile={lockersForomFile}
               />
             </Grid.Column>
           ))}

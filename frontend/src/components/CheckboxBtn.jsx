@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
 import uniqid from "uniqid";
 
-const CheckboxBtn = ({ value, lockers, setLockers, active }) => {
+const CheckboxBtn = ({
+  value,
+  lockers,
+  setLockers,
+  active,
+  lockersForomFile,
+}) => {
   const [btnActive, setBtnActive] = useState(false);
   const [classes, setClasses] = useState("chekcbox-btn");
 
   useEffect(() => {
     if (active) {
       setClasses("chekcbox-btn chekcbox-btn-active");
+      lockersForomFile.push({ text: value, id: uniqid() });
+      setLockers(lockersForomFile);
       setBtnActive(true);
     }
-  }, [active]);
+  }, [active, value]);
 
   const handleClick = (e) => {
     const btn = e.target;

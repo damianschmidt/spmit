@@ -77,14 +77,14 @@ const RoadInfo = ({
         <Segment inverted>
           Paczkomaty:
           {lockersArr.map((element, index) => (
-            <>
-              <span className="lockers-list">{` ${element} `}</span>
+            <span key={index}>
+              <span key={index} className="lockers-list">{` ${element} `}</span>
               {lockersArr.length - 1 !== index ? (
                 <Icon name="arrow right" />
               ) : (
                 ""
               )}
-            </>
+            </span>
           ))}
         </Segment>
         <Segment inverted>
