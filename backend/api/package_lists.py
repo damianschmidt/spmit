@@ -19,7 +19,16 @@ def get_package_lists():
     return jsonify(package_lists_names), 200
 
 
-@PACKAGE_LISTS.route('/<package_list_name>', methods=['GET'])
+@PACKAGE_LISTS.route('/<username>', methods=['GET'])
+def get_user_package_lists(username):
+    package_lists_db = PackageListsDbTools()
+    package_lists = package_lists_db.get_package_lists()
+
+    package_lists_names = [package_list['name'] for package_list in package_lists if package_list['courier'] == username]
+    return jsonify(package_lists_names), 200
+
+
+@PACKAGE_LISTS.route('/list/<package_list_name>', methods=['GET'])
 def get_package_list(package_list_name):
     package_lists_db = PackageListsDbTools()
     package_lists = package_lists_db.get_package_lists()
@@ -32,8 +41,8 @@ def get_package_list(package_list_name):
     return jsonify(msg), 404
 
 
-@PACKAGE_LISTS.route('', methods=['POST'])
-def add_package_list():
+@PACKAGE_LISTS.route('/<username>', methods=['POST'])
+def add_package_list(username):
     """
     POST args:
         file: (file)
@@ -50,6 +59,7 @@ def add_package_list():
     try:
         data_dict = {
             "name": list_file.filename[:-5],
+            "courier": username,
             "package_list": data['package_list']
         }
     except KeyError as error:
@@ -65,6 +75,7 @@ def delete_package_list():
     """
     DELETE args:
         name: (string)
+        courier: (string)
     """
     try:
         data_dict = DELETE_PACKAGE_LIST_SCHEMA.load(request.get_json())
