@@ -10,7 +10,7 @@ const CheckboxBtn = ({ value, lockers, setLockers, active }) => {
       setClasses("chekcbox-btn chekcbox-btn-active");
       setBtnActive(true);
     }
-  }, [active, btnActive]);
+  }, [active]);
 
   const handleClick = (e) => {
     const btn = e.target;
