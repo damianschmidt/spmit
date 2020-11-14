@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import uniqid from "uniqid";
-import { Grid, Header } from "semantic-ui-react";
+import { Dropdown, Grid, Header, Segment } from "semantic-ui-react";
 import CheckboxBtn from "./CheckboxBtn";
+
+const packages = [
+  { text: "pn_9_11.json", value: "pn_9_11.json", key: "pn_9_11.json" },
+  { text: "wt_10_11.json", value: "wt_10_11.json", key: "wt_10_11.json" },
+  { text: "sr_11_11.json", value: "sr_11_11.json", key: "sr_11_11.json" },
+  { text: "cz_12_11.json", value: "cz_12_11.json", key: "cz_12_11.json" },
+  { text: "pt_13_11.json", value: "pt_13_11.json", key: "pt_13_11.json" },
+];
 
 const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   const [options, setOptions] = useState([]);
@@ -48,6 +56,13 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
           ))}
         </Grid.Row>
       </Grid>
+
+      <Header size="small" inverted>
+        Wybierz paczkomaty automatycznie na podstawie listy
+      </Header>
+      <Segment inverted>
+        <Dropdown placeholder="Paczki" search selection options={packages} />
+      </Segment>
     </>
   );
 };

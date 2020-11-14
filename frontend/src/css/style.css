@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  margin-top: -15px;
   /* This pattern is downloaded from www.subtlepatterns.com  */
   background-image: url("../img/prism.png");
 }
@@ -10,6 +11,10 @@ body {
 
 .logo-img {
   margin-right: 1.5rem;
+}
+
+.menu {
+  margin-top: 0;
 }
 
 .menu-header::before {
@@ -145,8 +150,12 @@ body {
   background-color: #f26202;
 }
 
+.lockers-list {
+  color: #f26202;
+}
+
 .here-map {
-  height: 590px;
+  height: 530px;
   border-radius: 0.3rem;
   overflow: hidden;
 }
@@ -180,6 +189,116 @@ body {
   background-color: #00000030;
 }
 
+.package-list {
+  user-select: none;
+  padding-top: 0 !important;
+  padding-bottom: 5px !important;
+  color: #f2711c;
+  font-size: 1.1rem !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  line-height: 1rem;
+  cursor: pointer;
+}
+
+.package-list:hover {
+  text-shadow: #000000 2px 2px 2px;
+  color: #fd9652;
+  font-size: 1.1rem !important;
+}
+
+.package-list-content {
+  padding: 1rem;
+}
+
+.loader {
+  position: fixed;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #202020;
+  color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.spin {
+  position: relative;
+  padding-top: 50px;
+}
+
+.spin::before,
+.spin::after {
+  content: "";
+  width: 2.28571429rem;
+  height: 2.28571429rem;
+  margin: 0 0 0 -1.14285714rem;
+  position: absolute;
+  top: 0;
+  left: 45%;
+  border-radius: 500rem;
+}
+
+.spin::before {
+  border: 0.2em solid rgba(255, 255, 255, 0.1);
+}
+
+.spin::after {
+  animation: loader 0.6s linear;
+  border-color: #fff transparent transparent;
+  animation-iteration-count: infinite;
+  border-style: solid;
+  border-width: 0.2em;
+  box-shadow: 0 0 0 1px transparent;
+  box-sizing: inherit;
+}
+
+@keyframes loader {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  animation: fadeOut 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.package-order-li {
+  display: flex;
+  width: 150px;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.package-order-li-name {
+  width: 100px;
+}
+
+.package-order-li-icon {
+  width: 20px;
+}
+
+.item:hover {
+  background-color: #f2711c !important;
+  color: white !important;
+}
+
 @media (max-width: 540px) {
   .menu-mobile {
     display: none !important;
@@ -187,5 +306,13 @@ body {
 
   a[href="/logout"] {
     border: none;
+  }
+
+  .main-page {
+    display: none;
+  }
+
+  .home-page {
+    display: none;
   }
 }
