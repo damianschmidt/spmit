@@ -49,7 +49,7 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
 
   const handleChange = async (e) => {
     const response = await axios.get(
-      `http://localhost:5000/api/1/package_lists/${e.target.textContent}`
+      `http://localhost:5000/api/1/package_lists/list/${e.target.textContent}`
     );
 
     setOptions(
