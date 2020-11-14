@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
+import FormData from "form-data";
+import fs from "fs";
 import {
   Button,
   Form,
@@ -20,14 +23,23 @@ const packages = [
 const PackagesList = () => {
   const [open, setOpen] = useState(false);
 
-  const handleSubmit = (e) => {
-    // const reader = new FileReader();
-    console.log(e.target.files[0]);
-    // reader.readAsText(e.target.files[0]);
-    // reader.onload = () => {
-    //   const text = JSON.parse(reader.result);
-    //   console.log(text);
-    // };
+  const handleSubmit = async (e) => {
+    const file = e.target.elements[0].files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await axios.post(
+      "http://localhost:5000/api/1/package_lists",
+      formData,
+      {
+        // You need to use `getHeaders()` in Node.js because Axios doesn't
+        // automatically set the multipart form boundary in Node.
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    console.log(res);
   };
 
   return (
@@ -61,12 +73,7 @@ const PackagesList = () => {
             <Grid columns={2}>
               <Grid.Column width={10}>
                 <Modal.Description>
-                  <Input
-                    fluid
-                    type="file"
-                    accept=".json"
-                    onChange={handleSubmit}
-                  />
+                  <Input fluid type="file" accept=".json" />
                 </Modal.Description>
               </Grid.Column>
               <Grid.Column width={6}>
