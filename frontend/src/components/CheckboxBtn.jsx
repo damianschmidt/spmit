@@ -15,9 +15,15 @@ const CheckboxBtn = ({
     if (active) {
       setClasses("chekcbox-btn chekcbox-btn-active");
       lockersForomFile.push({ text: value, id: uniqid() });
-      setLockers(lockersForomFile);
       setBtnActive(true);
+    } else {
+      setClasses("chekcbox-btn");
+      const position = [...lockersForomFile].map((e) => e.text).indexOf(value);
+      [...lockersForomFile].splice(position, 1);
+      setBtnActive(false);
     }
+
+    setLockers(lockersForomFile);
   }, [active, value]);
 
   const handleClick = (e) => {

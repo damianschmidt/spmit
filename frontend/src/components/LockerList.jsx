@@ -7,7 +7,7 @@ import CheckboxBtn from "./CheckboxBtn";
 const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   const [options, setOptions] = useState([]);
   const [packages, setPackages] = useState([]);
-  const [lockersForomFile] = useState([]);
+  const [lockersForomFile, setLockersForomFile] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -49,6 +49,24 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   }, [setLockersDetails]);
 
   const handleChange = async (e) => {
+    setLockersForomFile([]);
+    setLockers([]);
+
+    // reset buttons
+    const buttons = document.querySelectorAll(".chekcbox-btn-active");
+    buttons.forEach((btn) => {
+      btn.classList.remove("chekcbox-btn-active");
+    });
+
+    setOptions(
+      options.map((e) => ({
+        key: e.key,
+        text: e.text,
+        value: e.value,
+        active: null,
+      }))
+    );
+
     const response = await axios.get(
       `http://localhost:5000/api/1/package_lists/list/${e.target.textContent}`
     );
