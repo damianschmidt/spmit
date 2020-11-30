@@ -13,6 +13,7 @@ import {
   Form,
 } from "semantic-ui-react";
 import Link from "./Link";
+import PackagesList from "./PackagesList";
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
@@ -104,7 +105,6 @@ const AdminPanel = () => {
           </Container>
         </Grid.Column>
       </Grid>
-
       <Grid stackable>
         <Grid.Row columns={3}>
           {users.map((user) => (
@@ -132,6 +132,9 @@ const AdminPanel = () => {
                       className="card-admin-panel description"
                       content={"Dzielnica: " + user.district}
                     />
+                  </Card.Content>
+                  <Card.Content className="package-list">
+                    <PackagesList user={user.value} />
                   </Card.Content>
                   <Card.Content extra>
                     <div className="ui two buttons">

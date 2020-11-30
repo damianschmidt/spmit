@@ -1,8 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import uniqid from "uniqid";
 
-const CheckboxBtn = ({ value, lockers, setLockers }) => {
+const CheckboxBtn = ({
+  value,
+  lockers,
+  setLockers,
+  active,
+  lockersForomFile,
+}) => {
   const [btnActive, setBtnActive] = useState(false);
+  const [classes, setClasses] = useState("chekcbox-btn");
+
+  useEffect(() => {
+    if (active) {
+      setClasses("chekcbox-btn chekcbox-btn-active");
+      lockersForomFile.push({ text: value, id: uniqid() });
+      setBtnActive(true);
+    } else {
+      setClasses("chekcbox-btn");
+      const position = [...lockersForomFile].map((e) => e.text).indexOf(value);
+      [...lockersForomFile].splice(position, 1);
+      setBtnActive(false);
+    }
+
+    setLockers(lockersForomFile);
+  }, [active, value]);
 
   const handleClick = (e) => {
     const btn = e.target;
@@ -19,7 +41,7 @@ const CheckboxBtn = ({ value, lockers, setLockers }) => {
   };
 
   return (
-    <button type="button" className="chekcbox-btn" onClick={handleClick}>
+    <button type="button" className={classes} onClick={handleClick}>
       {value}
     </button>
   );

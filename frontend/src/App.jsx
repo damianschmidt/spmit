@@ -20,6 +20,7 @@ const App = () => {
   const [lockersDetails, setLockersDetails] = useState([]);
   const [isLogged, setIsLogged] = useState();
   const [lockersArr, setLockersArr] = useState([]);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     if (localStorage.getItem("isLogged") === null) {
@@ -32,11 +33,16 @@ const App = () => {
     } else {
       setIsLogged(true);
     }
-  }, []);
+
+    setLoader(false);
+  }, [loader]);
 
   return (
     <>
       <BrowserRouter>
+        <div className={`loader ${loader ? "" : "hidden"}`}>
+          <div className="spin">Loading...</div>
+        </div>
         <HeaderBar />
         <Switch>
           <Route exact path="/">

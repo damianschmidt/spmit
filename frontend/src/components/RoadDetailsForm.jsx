@@ -40,7 +40,7 @@ const RoadDetailsForm = ({
         }
       );
 
-      setLockersArr(lockersArray);
+      setLockersArr(response.data.path.filter((e) => e !== "courier"));
 
       // validate latitude, longitude
       if (parseFloat(lat) && parseFloat(lng)) {

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import uniqid from "uniqid";
-import { Grid, Header } from "semantic-ui-react";
+import { Dropdown, Grid, Header, Segment } from "semantic-ui-react";
 import CheckboxBtn from "./CheckboxBtn";
 
 const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
   const [options, setOptions] = useState([]);
+  const [packages, setPackages] = useState([]);
+  const [lockersForomFile, setLockersForomFile] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -18,6 +20,21 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
         {}
       );
 
+      const userName =
+        localStorage.getItem("name") === "admin"
+          ? ""
+          : `/${localStorage.getItem("name")}`;
+      const list = await axios.get(
+        `http://localhost:5000/api/1/package_lists${userName}`
+      );
+      setPackages(
+        list.data.map((name, index) => ({
+          text: name,
+          value: name,
+          key: index,
+        }))
+      );
+
       setLockersDetails(response.data);
 
       setOptions(
@@ -25,10 +42,44 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
           key: uniqid(),
           text: e.name,
           value: e.name,
+          active: null,
         }))
       );
     })();
   }, [setLockersDetails]);
+
+  const handleChange = async (e) => {
+    setLockersForomFile([]);
+    setLockers([]);
+
+    // reset buttons
+    const buttons = document.querySelectorAll(".chekcbox-btn-active");
+    buttons.forEach((btn) => {
+      btn.classList.remove("chekcbox-btn-active");
+    });
+
+    setOptions(
+      options.map((e) => ({
+        key: e.key,
+        text: e.text,
+        value: e.value,
+        active: null,
+      }))
+    );
+
+    const response = await axios.get(
+      `http://localhost:5000/api/1/package_lists/list/${e.target.textContent}`
+    );
+
+    setOptions(
+      options.map((e) => ({
+        key: e.key,
+        text: e.text,
+        value: e.value,
+        active: response.data.includes(e.text) ? e.value : null,
+      }))
+    );
+  };
 
   return (
     <>
@@ -43,11 +94,26 @@ const LockerList = ({ lockers, setLockers, setLockersDetails }) => {
                 value={option.value}
                 lockers={lockers}
                 setLockers={setLockers}
+                active={option.active}
+                lockersForomFile={lockersForomFile}
               />
             </Grid.Column>
           ))}
         </Grid.Row>
       </Grid>
+
+      <Header size="small" inverted>
+        Wybierz paczkomaty automatycznie na podstawie listy
+      </Header>
+      <Segment inverted>
+        <Dropdown
+          placeholder="Paczki"
+          search
+          selection
+          options={packages}
+          onChange={handleChange}
+        />
+      </Segment>
     </>
   );
 };

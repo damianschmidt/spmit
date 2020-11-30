@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Grid, Header, Segment } from "semantic-ui-react";
+import { Grid, Header, Icon, Segment } from "semantic-ui-react";
 import Map from "./Map";
 
 const RoadInfo = ({
@@ -75,12 +75,21 @@ const RoadInfo = ({
           <Map />
         )}
         <Segment inverted>
-          Paczkomaty:{" "}
-          {lockersArr.map((element) => (
-            <span>{`${element} `}</span>
+          Paczkomaty:
+          {lockersArr.map((element, index) => (
+            <span key={index}>
+              <span key={index} className="lockers-list">{` ${element} `}</span>
+              {lockersArr.length - 1 !== index ? (
+                <Icon name="arrow right" />
+              ) : (
+                ""
+              )}
+            </span>
           ))}
         </Segment>
-        <Segment inverted>Czas podróży: {showTravelTime()}</Segment>
+        <Segment inverted>
+          Czas podróży: <span className="lockers-list">{showTravelTime()}</span>
+        </Segment>
       </Grid.Column>
     </Grid>
   );

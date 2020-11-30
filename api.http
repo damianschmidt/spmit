@@ -46,9 +46,9 @@ POST http://localhost:5000/api/1/lockers/route
 Content-Type: application/json
 
 {
-  "lockers_list": ["WRO88M","WRO911","WRO33A"], 
-  "courier_latitude": 51.09907, 
-  "courier_longitude": 17.027580
+  "lockers_list": ["WRO15M","WRO24N","WRO49M"], 
+  "courier_latitude": 51.1075, 
+  "courier_longitude": 17.0418
 }
 
 
@@ -104,4 +104,47 @@ Content-Type: application/json
 {
   "username": "kamildudek",
   "password": "kamildudek_password"
+}
+
+
+# get package list names
+###
+GET http://localhost:5000/api/1/package_lists
+
+
+# get courier package list names
+###
+GET http://localhost:5000/api/1/package_lists/kamildudek
+
+
+# get package list lockers
+###
+GET http://localhost:5000/api/1/package_lists/list/pn_16_11
+
+
+# add package list for courier
+###
+POST http://localhost:5000/api/1/package_lists/kamildudek
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"
+
+title
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="pn_16_11.json"
+Content-Type: file/json
+
+< ./tests/pn_16_11.json
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+# delete package list
+###
+DELETE http://localhost:5000/api/1/package_lists
+Content-Type: application/json
+
+{
+  "name": "pn_16_11",
+  "courier": "kamildudek"
 }

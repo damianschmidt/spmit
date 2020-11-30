@@ -21,7 +21,7 @@ const HeaderBar = () => {
           <Image size="mini" src={logoImage} className="logo-img" />
           SPMiT
         </Link>
-        <Link href="/" class="menu-mobile" isActive={isActive}>
+        <Link href="/" className="menu-mobile" isActive={isActive}>
           Strona Główna
         </Link>
         {!!localStorage.getItem("isLogged") ? (
