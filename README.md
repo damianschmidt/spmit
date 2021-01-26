@@ -1,12 +1,9 @@
 # Sterowanie Produkcją Magazynową i Transportową
-Implementacja projektu na zajęcia Sterowanie Produkcją Magazynową i Transportową. Wszystkie materiały związane z projektem można znaleźć w folderze [docs](docs).
+Implementacja projektu na zajęcia Sterowanie Produkcją Magazynową i Transportową.
 
 ## Temat projektu
 
 System wspomagający pracę kuriera. W zależności od natężenia ruchu i ilości paczek, które musi dostarczyć do danych paczkomatów, system wyznacza optymalną trasę pod względem czasu.
-
-## Tablica z zadaniami
-Wszystkie taski dotyczące projektu można znaleźć na tablicy [Trello](https://trello.com/b/LDROxPhi/spmit-pempera).
 
 ## Praca z projektem
 
